@@ -27,10 +27,27 @@
             "choose_button_color": "#4b4949",
             "cta_url": "/"
           }
+        },
+        "banner_block_KRiKrf": {
+          "type": "banner_block",
+          "settings": {
+            "banner_img": "shopify://shop_images/a-bold-modern-flat-lay-featuring-2-3-unisex-t-shirts-in-trendy-colors-black-olive-beige-stacked-slightly-offset-add-a-pair-of-sunglasses-and-a-chain-accessory-for-a-street-style-touch.png",
+            "sub_heading": "Our most-loved trending fits.",
+            "choose_sub_heading_color": "#4b4949",
+            "heading": "The Be90s Bestsellers",
+            "choose_heading_color": "#f3f3f3",
+            "content": "<p>Affordable streetwear, crafted for everyday wear and designed to make you stand out.</p>",
+            "choose_content_color": "#f3f3f3",
+            "cta_text": "Shop Bestsellers",
+            "choose_button_text_color": "",
+            "choose_button_color": "",
+            "cta_url": "/"
+          }
         }
       },
       "block_order": [
-        "banner_block_QPaVzM"
+        "banner_block_QPaVzM",
+        "banner_block_KRiKrf"
       ],
       "name": "Home Banner",
       "settings": {}
