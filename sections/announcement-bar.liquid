@@ -1,5 +1,6 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'section-announcement-bar.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign social_icons = true
@@ -105,6 +106,71 @@
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
                       {%- endif -%}
                     </p>
+                    <!-- Announcement Time Picker -->
+                    {% if block.settings.show_countdown and block.settings.launch_date != blank %}
+                      <div id="countdown-timer-{{ block.id }}" class="time-picker-table">
+                        <ul>
+                          <li>
+                            <span class="time" id="days-{{ block.id }}"> 00 </span>
+                            <span>Days</span>
+                          </li>
+                          <li>
+                            <span class="time" id="hours-{{ block.id }}"> 00 </span>
+                            <span>Hrs</span>
+                          </li>
+                          <li>
+                            <span class="time" id="minutes-{{ block.id }}"> 00 </span>
+                            <span>Mins</span>
+                          </li>
+                          <li>
+                            <span class="time" id="seconds-{{ block.id }}"> 00 </span>
+                            <span>Sec</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                          const launchDate = new Date('{{ block.settings.launch_date }}').getTime();
+                          const blockId = '{{ block.id }}';
+
+                          const daysEl = document.getElementById(`days-${blockId}`);
+                          const hoursEl = document.getElementById(`hours-${blockId}`);
+                          const minutesEl = document.getElementById(`minutes-${blockId}`);
+                          const secondsEl = document.getElementById(`seconds-${blockId}`);
+                          const timerEl = document.getElementById(`countdown-timer-${blockId}`);
+
+                          const countdown = setInterval(function () {
+                            const now = new Date().getTime();
+                            const distance = launchDate - now;
+
+                            if (distance < 0) {
+                              clearInterval(countdown);
+                              if (timerEl) {
+                                timerEl.innerHTML = 'Product Launched!';
+                              }
+                              return;
+                            }
+
+                            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                            if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
+                            if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+                            if (minutesEl) minutesEl.innerText = String(minutes).padStart(2, '0');
+                            if (secondsEl) secondsEl.innerText = String(seconds).padStart(2, '0');
+                          }, 1000);
+                        });
+                      </script>
+                    {% endif %}
+                    <!-- Shop Now Btn -->
+                    {% if block.settings.cta_url != blank and block.settings.cta_text != blank %}
+                      <a href="{{ block.settings.cta_url }}" class="primary-btn black-btn" tabindex="1">
+                        {{- block.settings.cta_text -}}
+                      </a>
+                    {% endif %}
+                    <!-- Announcement Budgs -->
                     {%- if block.settings.link != blank -%}
                       </a>
                     {%- endif -%}
@@ -244,6 +310,29 @@
           "type": "url",
           "id": "link",
           "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_countdown",
+          "label": "Show Countdown",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "launch_date",
+          "label": "Countdown Date & Time",
+          "default": "2025-07-01T00:00:00",
+          "info": "Preferred format: YYYY-MM-DDTHH:MM:SS (for example, 2025-07-01T00:00:00)"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Button Link"
         }
       ]
     }
@@ -251,6 +340,7 @@
   "presets": [
     {
       "name": "t:sections.announcement-bar.presets.name",
+      "category": "Custom Homepage",
       "blocks": [
         {
           "type": "announcement"
