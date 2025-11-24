@@ -13,7 +13,7 @@
 .announcement-bar-section .announcement-bar, 
 .announcement-bar-section .announcement-bar__announcement,
 .announcement-bar-section .announcement-bar__message{
-  color: var(--primary-color);
+  color: var(--white-color);
   font-family: var(--font-family-figtree);
   font-size: 1.6rem;
   line-height: 2.4rem;
@@ -43,7 +43,7 @@
   height: 100%;
 }
 .announcement-bar-section .announcement-bar-slider svg path{
-  fill: var(--primary-color);
+  fill: var(--white-color);
 }
 .announcement-bar-section .slider-button{
   padding: 0;
@@ -61,7 +61,7 @@
   font-weight: 400;
 }
 .announcement-bar-section .primary-btn:hover{
-  background: var(--grey-color);
+  background: var(--white-color);
   color: var(--primary-color);
 }
 /* Time Picker Table */
@@ -95,13 +95,13 @@
     background-repeat: no-repeat;
     position: absolute;
     right: -0.2rem;
-    color: var(--primary-color);
+    color: var(--white-color);
     top: 0;
     width: 0.4rem;
     height: 1.4rem;
   }
 .announcement-bar-section .time-picker-table ul li span{
-  color: var(--primary-color);
+  color: var(--white-color);
   font-size: 1.4rem;
   font-weight: 400;
   line-height: 1.5rem;
