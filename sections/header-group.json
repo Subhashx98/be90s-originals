@@ -19,7 +19,7 @@
           "settings": {
             "text": "Free Mystery Gift on Orders Above ₹999 -",
             "link": "",
-            "show_countdown": true,
+            "show_countdown": false,
             "launch_date": "2026-01-11T00:00:00",
             "cta_text": "Claim Gift",
             "cta_url": "/"
