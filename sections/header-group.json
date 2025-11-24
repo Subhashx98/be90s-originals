@@ -14,15 +14,31 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_qyQNUx": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free Mystery Gift on Orders Above ₹999 -",
+            "link": "",
+            "show_countdown": true,
+            "launch_date": "2026-07-01T00:00:00",
+            "cta_text": "Claim Gift",
+            "cta_url": "/"
+          }
+        },
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
             "text": "Welcome to our store",
-            "link": ""
+            "link": "",
+            "show_countdown": false,
+            "launch_date": "2025-07-01T00:00:00",
+            "cta_text": "",
+            "cta_url": ""
           }
         }
       },
       "block_order": [
+        "announcement_qyQNUx",
         "announcement-bar-0"
       ],
       "settings": {
