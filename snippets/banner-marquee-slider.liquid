@@ -1,0 +1,59 @@
+
+<div class="home-banner-marquee">
+  <ul>
+    {% for block in section.blocks %}
+      {% if block.type == 'marquee_slider' %}
+        <li>
+          {% if block.settings.icon != blank %}
+            <img
+              src="{{ block.settings.icon |  image_url }}"
+              height="32"
+              width="32"
+              alt="{{ block.settings.icon.alt | default: block.settings.title | default: 'Dazzle Dry' }}"
+              loading="lazy"
+            >
+          {% endif %}
+          {% if block.settings.title != blank %}
+            <span>{{ block.settings.title }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% for block in section.blocks %}
+      {% if block.type == 'marquee_slider' %}
+        <li>
+          {% if block.settings.icon != blank %}
+            <img
+              src="{{ block.settings.icon |  image_url }}"
+              height="32"
+              width="32"
+              alt="{{ block.settings.icon.alt | default: block.settings.title | default: 'Dazzle Dry' }}"
+              loading="lazy"
+            >
+          {% endif %}
+          {% if block.settings.title != blank %}
+            <span>{{ block.settings.title }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% for block in section.blocks %}
+      {% if block.type == 'marquee_slider' %}
+        <li>
+          {% if block.settings.icon != blank %}
+            <img
+              src="{{ block.settings.icon |  image_url }}"
+              height="32"
+              width="32"
+              alt="{{ block.settings.icon.alt | default: block.settings.title | default: 'Dazzle Dry' }}"
+              loading="lazy"
+            >
+          {% endif %}
+          {% if block.settings.title != blank %}
+            <span>{{ block.settings.title }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

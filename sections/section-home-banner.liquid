@@ -1,0 +1,194 @@
+{{ 'section-home-banner.css' | asset_url | stylesheet_tag }}
+{{ 'banner-marquee.css' | asset_url | stylesheet_tag }}
+<div class="home-banner">
+  <div class="banner-slide-arrow">
+    <button class="banner-slick-prev slick-prev slick-arrow">Prev</button>
+    <button class="banner-slick-next slick-next slick-arrow">Next</button>
+  </div>
+  <div class="home-banner-slider no-slider-list">
+    {% for block in section.blocks %}
+      {% if block.type == 'banner_block' %}
+        <div class="slick-slide slider-effects" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+          <div class="banner-slider-item" style="background-image: url('{{ block.settings.banner_img | image_url }}');">
+            <style>
+              @media screen and (max-width: 991px) {
+                .banner-slider-item {
+                  background-image: url('{{ block.settings.mob_banner | image_url }}');
+                }
+              }
+            </style>
+            <span class="banner-image">
+              {% if block.settings.banner_img != blank %}
+                <img
+                  src="{{ block.settings.banner_img |  image_url }}"
+                  height="610"
+                  width="780"
+                  alt="{{ block.settings.heading | default: 'Dazzle Dry' }}"
+                  loading="eager"
+                  class="desktop-img"
+                >
+              {% endif %}
+              {% if block.settings.mob_banner != blank %}
+                <img
+                  src="{{ block.settings.mob_banner |  image_url }}"
+                  height="368"
+                  width="600"
+                  alt="{{ block.settings.heading | default: 'Dazzle Dry' }}"
+                  loading="eager"
+                  class="mobile-img"
+                >
+              {% endif %}
+            </span>
+            <div class="slider-content">
+              {% if block.settings.sub_heading != blank %}
+                <span {% unless block.settings.choose_sub_heading_color == 'rgba(0,0,0,0)' %}style="color: {{ block.settings.choose_sub_heading_color }};"{% endunless %}>{{ block.settings.sub_heading }}</span>
+              {% endif %}
+              {% if block.settings.heading != blank %}
+                <h2 {% unless block.settings.choose_heading_color == 'rgba(0,0,0,0)' %}style="color: {{ block.settings.choose_heading_color }};"{% endunless %}>{{ block.settings.heading }}</h2>
+              {% endif %}
+              {% if block.settings.content != blank %}
+                <div {% unless block.settings.choose_content_color == 'rgba(0,0,0,0)' %}style="color: {{ block.settings.choose_content_color }};"{% endunless %}> {{ block.settings.content }} </div>
+              {% endif %}
+              {% if block.settings.cta_url != blank and block.settings.cta_text != blank %}
+                <a href="{{ block.settings.cta_url }}" class="primary-btn black-btn" 
+                  style="
+                      {% unless block.settings.choose_button_color == 'rgba(0,0,0,0)' or block.settings.choose_button_color == blank %}
+                        background-color: {{ block.settings.choose_button_color }};
+                      {% endunless %}
+                      {% unless block.settings.choose_button_text_color == 'rgba(0,0,0,0)' or block.settings.choose_button_text_color == blank %}
+                        color: {{ block.settings.choose_button_text_color }};
+                      {% endunless %}
+                    "
+                  >
+                    {{ block.settings.cta_text }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <!-- Marquee Slider -->
+  {% for block in section.blocks %}
+    {% if block.type == 'marquee_slider' %}
+      {% render 'banner-marquee-slider' %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+<script>
+  if (Shopify.designMode) {
+    document.addEventListener('shopify:block:select', function (event) {
+      const blockId = event.detail.blockId;
+      // Find the index of the slide with the matching block ID
+      const $slider = $('.home-banner-slider');
+      const $targetSlide = $slider.find(`[data-block-id="${blockId}"]`);
+      const slideIndex = $targetSlide.index();
+
+      if (slideIndex !== -1) {
+        $slider.slick('slickGoTo', slideIndex);
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Home Banner",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "banner_block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "banner_img",
+          "label": "Desktop Banner Image",
+          "info": "Recommended size: 1200 x 609"
+        },
+        {
+          "type": "image_picker",
+          "id": "mob_banner",
+          "label": "Mobile banner Image",
+          "info": "Recommended size: 360 x 363" 
+        },
+        {
+          "type": "inline_richtext",
+          "id": "sub_heading",
+          "label": "Sub Heading"
+        },
+        {
+          "type": "color",
+          "id": "choose_sub_heading_color",
+          "label": "Choose Sub Heading Color"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "color",
+          "id": "choose_heading_color",
+          "label": "Choose Heading Color"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+         {
+          "type": "color",
+          "id": "choose_content_color",
+          "label": "Choose Content Color"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "color",
+          "id": "choose_button_text_color",
+          "label": "Choose Button Text Color"
+        },
+        {
+          "type": "color",
+          "id": "choose_button_color",
+          "label": "Choose Button Color"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Button Link"
+        }
+      ]
+    },
+    {
+      "type": "marquee_slider",
+      "name": "Marquee Slider",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Recommended Image size: 32 x 32"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Banner",
+      "category": "Custom Homepage"
+    }
+  ]
+}
+{% endschema %}
