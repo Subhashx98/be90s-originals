@@ -13,8 +13,22 @@
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    {%- endunless -%}
+    {%- endunless -%}    
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload fonts stylesheet asynchronously -->
+<link rel="preload" 
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" 
+      as="style" 
+      onload="this.onload=null;this.rel='stylesheet'">
 
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+  <link rel="stylesheet" 
+        href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap">
+</noscript>
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -25,9 +39,29 @@
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
+    <link rel="preload" href="{{ 'component-cart-drawer.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'component-card.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'header-custom-megamenu.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'quantity-popover.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'component-discounts.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'section-announcement-bar.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'component-totals.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'component-slideshow.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'component-list-social.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'component-slider.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'custom-cart-drawer.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'component-cart.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'slick-slider.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'custom-header.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'component-price.css' | asset_url }}" as="style" >
+    <link rel="preload" href="{{ 'custom-menu-drawer.css' | asset_url }}" as="style" >
+    <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" as="script" >
+    <link rel="preload" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" as="script" >
 
     {% render 'meta-tags' %}
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
@@ -256,6 +290,8 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    <!-- Slick Slider CSS -->
+    {{ 'slick-slider.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -306,7 +342,9 @@
     {%- if settings.cart_type == 'drawer' -%}
       {%- render 'cart-drawer' -%}
     {%- endif -%}
-
+    {% if template == 'index' %}
+      <h1 style="display:none;">{{ shop.name }}</h1>
+    {% endif %}
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
@@ -372,5 +410,6 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

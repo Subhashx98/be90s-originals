@@ -1,0 +1,81 @@
+header-drawer{
+    display: flex;
+    align-items: center;
+}
+header-drawer .menu-drawer{
+    width: 100%;
+}
+header-drawer .menu-drawer-container .menu-drawer{
+    border-top:0.1rem solid #DDDDDD;
+}
+header-drawer .menu-drawer-container .menu-drawer__navigation{
+    padding: 2rem;
+}
+header-drawer .menu-drawer-container .menu-drawer__navigation li{
+    margin-bottom: 0;
+    border-top: 1px solid var(--grey-color);
+    padding: 2.0rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+header-drawer .menu-drawer-container .menu-drawer__navigation li:first-child{
+    border-top: 0;
+}
+header-drawer .menu-drawer-container .menu-drawer__navigation>.menu-drawer__menu>li:last-child{
+    border-bottom: 1px solid var(--grey-color);;
+}
+header-drawer .menu-drawer-container .menu-drawer__navigation li.active-list{
+    border-radius: 1.0rem;
+    background: #F6F6F6;
+    border-color: transparent;
+}
+header-drawer .menu-drawer-container .menu-drawer__navigation li.active-list+li{
+    border-color: transparent;
+}
+header-drawer .menu-drawer-container .menu-drawer__menu-item{
+    font-size: 1.6rem;
+    color: rgba(36, 36, 41, 0.8);
+    font-weight: 500;
+    line-height: normal;
+    width: auto;
+    padding: 0;
+}
+header-drawer .menu-drawer-container .menu-drawer__menu-item:hover{
+    color: var(--secondary-color);
+}
+header-drawer .menu-drawer__menu-item--active:hover,
+header-drawer .menu-drawer-container .menu-drawer__menu-item--active,
+header-drawer .menu-drawer-container .menu-drawer__menu-item:focus,
+header-drawer .menu-drawer-container .menu-drawer__menu-item:hover{
+    background-color: transparent;
+}
+header-drawer .menu-drawer-container .list-menu-item{
+    position: relative;
+}
+header-drawer .menu-drawer-container .list-menu-item::after{
+    border: solid #242429CC;
+    border-width: 0 1.5px 1.5px 0;
+    display: inline-flex;
+    padding: .44rem;
+    transform: rotate(45deg) translateY(-50%);
+    -webkit-transform: rotate(45deg) translateY(-50%);
+    margin-right: 0.5rem;
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 24px;
+}
+header-drawer .menu-drawer-container .menu-drawer__navigation li.active-list::after{
+    transform: rotate(-135deg) translateY(-50%);
+    -webkit-transform: rotate(-135deg) translateY(-50%);
+}
+header-drawer .menu-drawer-container .menu-drawer__utility-links{
+    display: none;
+}
+@media screen and (max-width: 750px) {
+header-drawer .header__icons {
+    display: none !important;
+  }
+}

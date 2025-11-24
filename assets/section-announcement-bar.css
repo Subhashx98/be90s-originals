@@ -1,0 +1,143 @@
+.announcement-bar-section{position: sticky; top: 0;}
+.announcement-bar-section .utility-bar{
+  background: var(--secondary-color);
+  padding: 0.8rem 0;
+}
+.announcement-bar-section .utility-bar .utility-bar__grid{
+  display: flex;
+}
+.announcement-bar{
+  align-items: center;
+  gap: 0.8rem;
+}
+.announcement-bar-section .announcement-bar, 
+.announcement-bar-section .announcement-bar__announcement,
+.announcement-bar-section .announcement-bar__message{
+  color: var(--primary-color);
+  font-family: var(--font-family-figtree);
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  letter-spacing: 0;
+}
+/* Announcement Slider */
+.announcement-bar-section .announcement-bar__announcement{
+  width: auto;
+  gap: 0.8rem;
+  align-items: center;
+}
+.announcement-bar-section .announcement-bar__message{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.announcement-bar-section .announcement-tag-icon{
+  width: 1.4rem;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+}
+.announcement-bar-section .announcement-tag-icon svg{
+  width: 100%;
+  height: 100%;
+}
+.announcement-bar-section .announcement-bar-slider svg path{
+  fill: var(--primary-color);
+}
+.announcement-bar-section .slider-button{
+  padding: 0;
+  width: auto;
+}
+.announcement-bar-section .slider-button .icon{
+  height: .8rem;
+}
+/* Button */
+.announcement-bar-section .primary-btn{
+  font-size: 1.4rem;
+  padding: 0.7rem 4.0rem;
+  line-height: 2.2rem;
+  border-radius: 3.2rem;
+  font-weight: 400;
+}
+.announcement-bar-section .primary-btn:hover{
+  background: var(--grey-color);
+  color: var(--primary-color);
+}
+/* Time Picker Table */
+.announcement-bar-section .time-picker-table{
+  display: flex;
+  align-items: center;
+}
+.announcement-bar-section .time-picker-table ul{
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0;
+}
+.announcement-bar-section .time-picker-table ul li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 0 0.8rem;
+}
+.announcement-bar-section .time-picker-table ul li:first-child{
+  padding-left: 0;
+}
+.announcement-bar-section .time-picker-table ul li:last-child{
+  padding-right: 0;
+}
+.announcement-bar-section .time-picker-table ul li:not(:last-child)::before{
+    content: "";
+    background: url(icon-colon.svg);
+    background-size: 0.4rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: -0.2rem;
+    color: var(--primary-color);
+    top: 0;
+    width: 0.4rem;
+    height: 1.4rem;
+  }
+.announcement-bar-section .time-picker-table ul li span{
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+.announcement-bar-section .time-picker-table ul li span.time{
+  font-size: 1.8rem;
+}
+.announcement-bar-section .announcement-bar__link {
+  height: auto;
+  width: auto;
+}
+/* Responsive */
+@media screen and (min-width: 990px) {
+  .announcement-bar-slider .slider{max-width: fit-content; width: auto;}
+}
+@media screen and (max-width: 989px) {
+  .announcement-bar-section .announcement-bar, .announcement-bar-section .announcement-bar__announcement, 
+  .announcement-bar-section .announcement-bar__message{font-size: 1.4rem; line-height: 2.0rem;}
+  .announcement-bar .slider-button{ height: 3.4rem;}
+  .announcement-bar-section .announcement-bar__message{min-height: auto;}
+  .announcement-bar-section .primary-btn{font-size: 1.2rem; padding: .4rem 2.0rem; min-width: 10rem;}
+  .announcement-bar-section .time-picker-table ul li{padding: 0 .6rem;}
+  .announcement-bar-section .time-picker-table ul li span.time{ font-size: 1.6rem;}
+  .announcement-bar-section .time-picker-table ul li span{ font-size: 1.2rem; line-height: 1.4rem;}
+  .announcement-bar-section .time-picker-table ul li:not(:last-child):before{background-size: .3rem;
+    width: .3rem; right: -0.15rem; height: 1.1rem;}
+  .announcement-bar .slider-button--prev{ min-width: 2.4rem;margin-left: -2.5rem;}
+  .announcement-bar .slider-button--next{margin-right: -2.5rem; min-width: 2.4rem;}
+  /* .announcement-bar-section{position: inherit;} */
+}
+@media screen and (max-width: 767px) {
+  .announcement-bar-section .announcement-bar__message{ max-width: 100%;}
+  .announcement-bar-section .primary-btn {
+    display: none !important;
+  }
+}
+/* @media screen and (max-width: 420px) {
+  .announcement-bar-section .announcement-bar__message{ max-width: 100%;}
+} */
