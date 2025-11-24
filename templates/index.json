@@ -43,11 +43,28 @@
             "choose_button_color": "",
             "cta_url": "/"
           }
+        },
+        "banner_block_iz6Wmc": {
+          "type": "banner_block",
+          "settings": {
+            "banner_img": "shopify://shop_images/a-clean-stylish-winter-clothing-flat-lay-featuring-two-unisex-hoodies-in-modern-colors-olive-green-and-charcoal-grey-neatly-folded-with-the-hood-visible-add-subtle-accessories-like-a.png",
+            "sub_heading": "Premium Hoodies & Unisex Tees.",
+            "choose_sub_heading_color": "#a5b7c3",
+            "heading": "The Winter Drop '25",
+            "choose_heading_color": "#a5b7c3",
+            "content": "<p>Cozy fits, fresh colors — designed for the 90s vibe, made for today.</p>",
+            "choose_content_color": "#a5b7c3",
+            "cta_text": "Explore Collection",
+            "choose_button_text_color": "#f3f3f3",
+            "choose_button_color": "#4b4949",
+            "cta_url": "/"
+          }
         }
       },
       "block_order": [
         "banner_block_QPaVzM",
-        "banner_block_KRiKrf"
+        "banner_block_KRiKrf",
+        "banner_block_iz6Wmc"
       ],
       "name": "Home Banner",
       "settings": {}
