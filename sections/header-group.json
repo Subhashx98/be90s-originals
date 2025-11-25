@@ -22,7 +22,7 @@
             "show_countdown": false,
             "launch_date": "2026-01-11T00:00:00",
             "cta_text": "Claim Gift",
-            "cta_url": "/"
+            "cta_url": "shopify://collections"
           }
         },
         "announcement-bar-0": {
