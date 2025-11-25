@@ -1,0 +1,36 @@
+/* Breadcrumbs */
+.breadcrumbs{
+	padding: 0 0 2.0rem;
+}
+.breadcrumbs ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+.breadcrumbs ul li{
+	display: flex;
+	align-items: center;
+    gap: 1.0rem;
+	padding-left: 1.0rem;
+    text-transform: capitalize;
+}
+.breadcrumbs ul li::before{
+	content: "/";
+	font-size: 1.4rem;
+	color: var(--primary-color);
+}
+.breadcrumbs ul li:first-child{
+	padding-left: 0;
+}
+.breadcrumbs ul li:first-child::before{
+	display: none;
+}
+.breadcrumbs ul li a{
+	font-size: 1.6rem;
+	line-height: normal;
+	color: var(--primary-color);
+	text-transform: capitalize;
+}
+.breadcrumbs ul li a:hover{
+    color: var(--secondary-color);
+}

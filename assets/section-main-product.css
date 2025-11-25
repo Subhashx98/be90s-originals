@@ -218,7 +218,7 @@ product-info {
 /* Product info */
 
 .product__info-container > * + * {
-  margin: 1.5rem 0;
+  margin: 2.4rem 0;
 }
 
 .product__info-container iframe {
@@ -228,7 +228,7 @@ product-info {
 .product__info-container .product-form,
 .product__info-container .product__description,
 .product__info-container .icon-with-text {
-  margin: 2.5rem 0;
+  margin: 2.4rem 0;
 }
 
 .product__text {
@@ -268,14 +268,6 @@ a.product__text {
 
 .product__accordion .accordion__content {
   padding: 0 1rem;
-}
-
-.product .price .badge {
-  margin-bottom: 0.5rem;
-}
-
-.product .price__container {
-  margin-bottom: 0.5rem;
 }
 
 .product .price dl {
@@ -1300,7 +1292,7 @@ a.product__text {
 .product-media-container.constrain-height {
   /* arbitrary offset value based on average theme spacing and header height */
   --viewport-offset: 400px;
-  --constrained-min-height: 300px;
+  --constrained-min-height: 364px;
   --constrained-height: max(var(--constrained-min-height), calc(100vh - var(--viewport-offset)));
   margin-right: auto;
   margin-left: auto;

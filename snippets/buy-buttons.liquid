@@ -10,7 +10,7 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
-<div {{ block.shopify_attributes }}>
+<div class="product-form-buttons" {{ block.shopify_attributes }}>
   {%- if product != blank -%}
     {%- liquid
       assign gift_card_recipient_feature_active = false
@@ -74,7 +74,7 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            class="primary-btn black-btn button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
@@ -91,6 +91,7 @@
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
             </span>
+            <span class="product-variant-price" id="ProductVariantPrice-{{ section_id }}">- {{ product.selected_or_first_available_variant.price | money }} </span>
             {%- render 'loading-spinner' -%}
           </button>
           {%- if show_dynamic_checkout -%}
@@ -105,7 +106,7 @@
         <button
           type="submit"
           name="add"
-          class="product-form__submit button button--full-width button--primary"
+          class="primary-btn black-btn button button--full-width button--primary"
           disabled
         >
           {{ 'products.product.sold_out' | t }}

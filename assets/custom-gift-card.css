@@ -1,0 +1,191 @@
+.main-product-block.main-gift-card{
+    margin: 0;
+    border: 0;
+}
+.main-product-block.main-gift-card .product{
+    padding-bottom: 60px;
+}
+.main-product-block .product.product-gift-card .product__info-wrapper{
+    border: 0;
+    padding: 16px;
+    border-radius: 20px;
+    background-color: var(--background-color);
+}
+.main-product-block .product.product-gift-card .product__info-container{
+    border: 0;
+    padding-bottom: 4px;
+}
+.main-product-block .product.product-gift-card .product__title h1, 
+.main-product-block .product.product-gift-card .product__title .h1{
+    font-size: 50px;
+    line-height: 60px;
+    letter-spacing: -2px;
+    padding-right: 0;
+}
+.main-product-block .product.product-gift-card .iwish-app-block-product{
+    display: none;
+}
+.main-product-block .product.product-gift-card .select-variant .product-form__input--pill input[type=radio]+label{
+    font-size: 14px;
+    line-height: 22px;
+    background: transparent;
+    padding: 0;
+    font-weight: 400;
+    vertical-align: top;
+    min-width: 82px;
+}
+.main-product-block .product.product-gift-card .product-form__input--pill input[type=radio]+label:before{
+    position: static;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid var(--white-color);
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 8px;
+    margin-top: 1px;
+    box-shadow: 0 0 0 1px var(--primary-color);
+}
+.main-product-block .product.product-gift-card .select-variant .product-form__input--pill input[type=radio]:checked+label{
+    color: var(--primary-color);
+}
+.main-product-block .product.product-gift-card .select-variant .product-form__input--pill input[type=radio]:checked+label:before{
+    color: var(--primary-color);
+    background: var(--primary-color);
+}
+.main-product-block .product.product-gift-card .quantity-and-cart .product-form__quantity{
+    display: none;
+}
+.main-product-block .product.product-gift-card .quantity-and-cart .product-form-buttons{
+    width: 100%;
+}
+.main-product-block .product.product-gift-card .product-left-reviews{
+    background: var(--primary-color);
+}
+.main-product-block .product.product-gift-card .product-left-reviews .yotpo-shoppers-say .single-best-sentence .sentence,
+.main-product-block .product.product-gift-card .product-left-reviews .single-sentence-text-content .display-name,
+.main-product-block .product.product-gift-card .product-left-reviews .review-title,
+.main-product-block .product.product-gift-card .product-left-reviews .full-review{
+    color: var(--white-color);
+}
+.main-product-block .product.product-gift-card  .product-left-reviews .yotpo-shoppers-say .yotpo-icon{
+    color: var(--white-color) !important
+}
+.main-product-block .product.product-gift-card .product-gift-card-info h2{
+    font-size: 20px;
+    line-height: normal;
+    font-weight: 600;
+    font-family: var(--font-family-figtree);
+    color: var(--primary-color);
+}
+.main-product-block .product-gift-card-info .product__description p{
+    line-height: 24px;
+}
+.main-product-block .product-gift-card-info .product__description p:empty{
+    display: none;
+}
+.main-product-block .product-gift-card-info .product__description ul{
+    list-style-position: outside;
+}
+.main-product-block .product-gift-card-info .product__description ul li{
+    font-size: 12px;
+    line-height: 22px;
+}
+.main-product-block .product-gift-card-info .payment-security{
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 24px;
+    padding-top: 24px;
+}
+.main-product-block .product-gift-card-info .payment-security .product-payment{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+}
+.main-product-block .product-gift-card-info .payment-security .product-payment a{
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 4px;
+}
+.main-product-block .product-gift-card-info .payment-security .product-payment a img{
+    width: 35px;
+    height: 24px;
+}
+.main-product-block .product-gift-card-info .payment-security p{
+    font-size: 14px;
+    line-height: 22px;
+}
+.main-product-block .product-gift-card-info .payment-security:last-child p{
+    margin-bottom: 0;
+}
+
+/* Product Gift Card Guarantee */
+.main-product-block .product.product-gift-card .product-gift-guarantee{
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.main-product-block .product.product-gift-card .product-gift-guarantee ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.main-product-block .product.product-gift-card .product-gift-guarantee ul li{
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    min-width: 43%;
+}
+.main-product-block .product.product-gift-card .product-gift-guarantee ul li img{
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+.main-product-block .product.product-gift-card  .product-gift-card-info{
+    padding: 28px;
+    border-radius: 2rem;
+    width: 100%;
+    background: var(--white-color);
+    margin-top: 12px;
+}
+.main-product-block .product.product-gift-card  .product-form .product-form__buttons .button .product-variant-price{
+	display: inline-flex;
+}
+/* Responsive */
+@media screen and (min-width: 990px) {
+    .main-product-block .product.product-gift-card .product__info-wrapper{
+        max-width: calc(45% - 18px);
+        width:calc(45% - 18px);
+        margin-left: 18px;
+    }
+}
+@media screen and (max-width: 989px){
+    .main-product-block.main-gift-card .product{padding-bottom: 40px;}
+    .main-product-block .product.product-gift-card .slider.slider--mobile{margin: 0; padding-bottom: 30px; border: 0;}
+    .main-product-block .product.product-gift-card .product__info-container{ padding: 16px; border-radius: 10px;}
+    .main-product-block .product.product-gift-card .product__title h1, 
+    .main-product-block .product.product-gift-card .product__title .h1{
+        font-size: 24px; line-height: 32px; letter-spacing: 0px;
+    }
+    .main-product-block .product.product-gift-card .product-form__input--pill input[type=radio]+label:before{ display: none;}
+    .main-product-block .product.product-gift-card .select-variant .product-form__input--pill input[type=radio]+label{    
+        border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 32px; padding: 10px 16px; margin: 5px 0 0;}
+    .main-product-block .product.product-gift-card .select-variant .product-form__input--pill input[type=radio]:checked+label{
+        border-color: var(--primary-color);
+    }
+    .main-product-block .product.product-gift-card .product-gift-guarantee{ margin-bottom: 0;}
+    .main-product-block .product.product-gift-card .product-gift-guarantee ul{gap: 12px;}
+    .main-product-block .product.product-gift-card .product-gift-guarantee ul li{ min-width: inherit; width: calc(50% - 8px);}
+    .main-product-block .product.product-gift-card .product-gift-card-info{ padding: 16px; border-radius: 10px;}
+    .main-product-block .product.product-gift-card .product-gift-card-info h2{ font-size: 18px;}
+    .main-product-block .product-gift-card-info .payment-security{margin-top: 20px; padding-top: 20px;}
+    .main-product-block .product-gift-card-info .payment-security .product-payment{    margin-top: 12px;}
+    .main-product-block .product.product-gift-card .product-left-reviews.mobile-product-reviews{  margin-top:24px }
+    .main-product-block .breadcrumbs-gift-card .breadcrumbs{ display: block;}
+}
+@media screen and (max-width: 576px){
+    .main-product-block .product.product-gift-card .product-gift-guarantee ul li{ width: 100%;}
+}

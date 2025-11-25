@@ -1,0 +1,164 @@
+{%- unless template == 'index' or template == '404' -%}
+    {%- assign t = template | split: '.' | first -%}
+    <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
+      <ul class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="/">Home</a>
+        </li>
+        {% assign pro_collection = product.collections.last %}
+        {% if pro_collection %}
+          <li class="breadcrumbs__item">
+            {{ pro_collection.title | link_to: pro_collection.url }}
+          </li>
+        {% endif %}
+        {%- case t -%}
+          {%- when 'page' -%}
+            <li class="breadcrumbs__item">
+              {% comment %} <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page"> {% endcomment %}
+                {{ page.title }}
+                {% comment %} </a> {% endcomment %}
+            </li>
+          {%- when 'product' -%}
+            {%- if collection.url -%}
+              <li class="breadcrumbs__item breadcrumbs__link_n">
+                {{ collection.title | link_to: collection.url }}
+              </li>
+            {%- endif -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link breadcrumbs__link_1" href="{{ product.url }}" aria-current="page">
+                {{- product.title -}}
+              </a>
+            </li>
+          {%- when 'collection' and collection.handle -%}
+            {%- if current_tags -%}
+              <li class="breadcrumbs__item">
+                {{ collection.title | link_to: collection.url }}
+              </li>
+              <li class="breadcrumbs__item breadcrumbs__link_1">
+                {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+" }}{%- endcapture -%}
+                <a class="breadcrumbs__link breadcrumbs__link_1" href="{{ tag_url }}" aria-current="page">
+                  {{- current_tags | join: ' + ' -}}
+                </a>
+              </li>
+            {%- else -%}
+              <li class="breadcrumbs__item ">
+                <a class="breadcrumbs__link breadcrumbs__link_1" href="{{ collection.url }}" aria-current="page">
+                  {{- collection.title -}}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- when 'blog' -%}
+            {%- if current_tags -%}
+              <li class="breadcrumbs__item">
+                {{ blog.title | link_to: blog.url }}
+              </li>
+              <li class="breadcrumbs__item">
+                {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+                <a class="breadcrumbs__link breadcrumbs__link_1" href="{{ tag_url }}" aria-current="page">
+                  {{- current_tags | join: ' + ' -}}
+                </a>
+              </li>
+            {%- else -%}
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link breadcrumbs__link_1" href="{{ blog.url }}" aria-current="page">
+                  {{- blog.title -}}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- when 'article' -%}
+            <li class="breadcrumbs__item">
+              {{ blog.title | link_to: blog.url }}
+            </li>
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link breadcrumbs__link_1" href="{{ article.url }}" aria-current="page">
+                {{- article.title -}}
+              </a>
+            </li>
+          {%- else -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link breadcrumbs__link_1" href="{{ request.path }}" aria-current="page">
+                {{- page_title -}}
+              </a>
+            </li>
+        {%- endcase -%}
+      </ul>
+    </nav>
+     <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ shop.url }}"
+        }
+        {% assign position = 2 %}
+        {% if pro_collection %}
+        ,{
+          "@type": "ListItem",
+          "position": {{ position }},
+          "name": "{{ pro_collection.title | escape }}",
+          "item": "{{ shop.url }}{{ pro_collection.url }}"
+        }
+        {% assign position = position | plus: 1 %}
+        {% endif %}
+        {%- case t -%}
+          {%- when 'page' -%}
+          ,{
+            "@type": "ListItem",
+            "position": {{ position }},
+            "name": "{{ page.title | escape }}",
+            "item": "{{ shop.url }}{{ page.url }}"
+          }
+          {%- when 'product' -%}
+          {%- if collection.url -%}
+          ,{
+            "@type": "ListItem",
+            "position": {{ position }},
+            "name": "{{ collection.title | escape }}",
+            "item": "{{ shop.url }}{{ collection.url }}"
+          }
+          {% assign position = position | plus: 1 %}
+          {%- endif -%}
+          ,{
+            "@type": "ListItem",
+            "position": {{ position }},
+            "name": "{{ product.title | escape }}",
+            "item": "{{ shop.url }}{{ product.url }}"
+          }
+          {%- when 'collection' and collection.handle -%}
+          ,{
+            "@type": "ListItem",
+            "position": {{ position }},
+            "name": "{{ collection.title | escape }}",
+            "item": "{{ shop.url }}{{ collection.url }}"
+          }
+          {% if current_tags %}
+          ,{
+            "@type": "ListItem",
+            "position": {{ position | plus: 1 }},
+            "name": "{{ current_tags | join: ' + ' | escape }}",
+            "item": "{{ shop.url }}{{ collection.url }}/{{ current_tags | join: '+' }}"
+          }
+          {% endif %}
+          {%- when 'article' -%}
+          ,{
+            "@type": "ListItem",
+            "position": {{ position }},
+            "name": "{{ blog.title | escape }}",
+            "item": "{{ shop.url }}{{ blog.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": {{ position | plus: 1 }},
+            "name": "{{ article.title | escape }}",
+            "item": "{{ shop.url }}{{ article.url }}"
+          }
+        {%- endcase -%}
+      ]
+    }
+  </script>
+  {%- endunless -%}
+  
