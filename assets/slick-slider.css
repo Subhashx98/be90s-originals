@@ -140,4 +140,7 @@
 .slick-arrow:hover{
     background: var(--secondary-color);
 }
+.slick-arrow:hover:before{
+    border-color: var(--white-color);
+}
 .slick-next.slick-arrow{margin-right: 0;}
