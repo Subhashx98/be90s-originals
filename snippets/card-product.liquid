@@ -70,7 +70,7 @@
         {% elsif card_product.tags contains 'Featured' %}
           <span class="bestseller_tag">{{ 'static_content.product.tags.featured' | t }}</span>
         {% endif %}
-        <div class="reviews-tag">
+        {% comment %} <div class="reviews-tag">
           <div
             class="yotpo-widget-instance"
             data-yotpo-instance-id="356028"
@@ -78,7 +78,7 @@
             data-yotpo-cart-product-id="{{item.product.id}}"
             data-yotpo-section-id="{{template.name}}"
           ></div>
-        </div>
+        </div> {% endcomment %}
       </div>
       <div
         class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
