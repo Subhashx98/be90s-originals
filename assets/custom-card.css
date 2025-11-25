@@ -287,8 +287,8 @@
     .card-wrapper .card-bottom-content{padding: 0 1rem 1rem; position: relative; z-index: 1;}
     .card-wrapper .quick-add-main{gap: 0.5rem; margin-top: 1.0rem;}
     .card-wrapper .wishlist-wrapper{ width: 3.8rem; height: 3.8rem;}
-    .card-wrapper .quick-add, .card-wrapper .easy-bundle-view .custom-bundle-button{width: calc(100% - 4.3rem);}
-    .card-wrapper .quick-add__submit{ min-height: 3.8rem; background: var(--secondary-color);}
+    .card-wrapper .quick-add, .card-wrapper .easy-bundle-view .custom-bundle-button{width: calc(100% - 0rem);}
+    .card-wrapper .quick-add__submit{ min-height: 3.8rem; background: var(--secondary-color); color: var(--white-color); fill: var(--white-color);}
     .card-wrapper .card-bottom-content .quick-view-btn{ margin-top: 1.0rem;}
     .card-wrapper .card-bottom-content .quick-form-select{background: var(--white-color); border-radius: 5px; padding: 10px 26px 10px 10px;}
     .card-wrapper .card-bottom-content .select .svg-wrapper{right: 10px;}
