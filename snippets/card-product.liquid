@@ -65,10 +65,10 @@
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div class="product-tag-reviews">
-        {% if card_product.tags contains 'New' %}
-          <span class="bestseller_tag">{{ 'static_content.product.tags.new' | t }}</span>
-        {% elsif card_product.tags contains 'Featured' %}
-          <span class="bestseller_tag">{{ 'static_content.product.tags.featured' | t }}</span>
+        {% if card_product.tags contains 'new' %}
+          <span class="bestseller_tag">New</span>
+        {% elsif card_product.tags contains 'bestseller' %}
+          <span class="bestseller_tag">Best Seller</span>
         {% endif %}
         {% comment %} <div class="reviews-tag">
           <div
