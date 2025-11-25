@@ -65,10 +65,20 @@
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div class="product-tag-reviews">
-        {% if card_product.tags contains 'new' %}
-          <span class="bestseller_tag">New</span>
-        {% elsif card_product.tags contains 'bestseller' %}
-          <span class="bestseller_tag">Best Seller</span>
+        {% if card_product.compare_at_price > card_product.price %}
+          {% assign compare = card_product.compare_at_price %}
+          {% assign price = card_product.price %}
+          {% assign discount = compare | minus: price %}
+          {% assign discount_percentage = discount | times: 100 | divided_by: compare | round %}
+          <span class="discount_tag">
+            <span class="bestseller_tag">{{ discount_percentage }}% OFF</span>
+          </span>
+        {% else %}
+          {% if card_product.tags contains 'new' %}
+            <span class="bestseller_tag">New</span>
+          {% elsif card_product.tags contains 'bestseller' %}
+            <span class="bestseller_tag">Best Seller</span>
+          {% endif %}
         {% endif %}
         {% comment %} <div class="reviews-tag">
           <div
