@@ -75,7 +75,7 @@
       "name": "Best Seller",
       "settings": {
         "title": "Women’s Top Wear",
-        "collection": "tops",
+        "collection": "womens",
         "products_to_show": 25,
         "show_secondary_image": true,
         "quick_add": "standard",
