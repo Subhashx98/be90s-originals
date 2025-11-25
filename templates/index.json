@@ -70,37 +70,22 @@
       "name": "Home Banner",
       "settings": {}
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "section_best_seller_LakK7j": {
+      "type": "section-best-seller",
+      "name": "Best Seller",
       "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
+        "title": "Women’s Top Wear",
+        "collection": "tops",
+        "products_to_show": 25,
         "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
+        "quick_add": "standard",
+        "cta_text": "Explore All",
+        "cta_url": "shopify://collections/tops"
       }
     }
   },
   "order": [
     "section_home_banner_9KDWpD",
-    "featured_collection"
+    "section_best_seller_LakK7j"
   ]
 }
