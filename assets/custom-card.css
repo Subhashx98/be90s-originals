@@ -1,0 +1,311 @@
+.card-wrapper{
+    background: #f5f0f4;
+    border-radius: 1.0rem;
+    overflow: hidden;
+    width: 100%;
+}
+.card-wrapper .card{
+    position: relative;
+}
+.card-wrapper .card .card__content .card__information{
+    grid-row-start: 1;
+    padding: 2.0rem 2.0rem 0;
+}
+.card-wrapper .product-tag-reviews{
+    position: absolute;
+    left: 58px;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 1;
+    padding: 1.0rem;
+    gap: 10px;
+}
+.card-wrapper .product-tag-reviews .reviews-tag {
+    margin-left: auto;
+}
+.card-wrapper .product-tag-reviews .reviews-tag .yotpo-reviews-star-ratings-widget{
+    align-items: center;
+    background: var(--white-color);
+    padding: 4px 10px;
+    border-radius: 15px;
+    margin-bottom: 0 !important;
+}
+.card-wrapper .product-tag-reviews .reviews-tag .yotpo-sr-bottom-line-summary{
+    flex-direction: row !important;
+}
+.card-wrapper .product-tag-reviews .reviews-tag .yotpo-sr-bottom-line-summary span{
+    height: auto !important;
+}
+.card-wrapper .product-tag-reviews .reviews-tag .yotpo-sr-bottom-line-summary span svg path{
+    fill: #C28B00;
+    stroke: #C28B00;
+}
+.card-wrapper .product-tag-reviews .reviews-tag .yotpo-sr-bottom-line-summary span svg:not(:first-child){
+    display: none !important;
+}
+.card-wrapper .product-tag-reviews .reviews-tag .yotpo-sr-bottom-line-score{
+    font-family: var(--font-family-figtree) !important;
+    color: var(--primary-color) !important;
+    line-height: 24px;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: 400 !important;
+}
+.card-wrapper .product-tag-reviews .reviews-tag .yotpo-sr-bottom-line-right-panel{
+    display: none;
+}
+.card-wrapper .product-tag-reviews .reviews-tag .yotpo-reviews-star-ratings-widget .yotpo-sr-bottom-line-text{
+    font-size: 13px !important;
+    color: rgb(36, 36, 41, 0.8) !important;
+    line-height: normal !important;
+    font-family: var(--font-family-figtree) !important;
+    padding: 0 !important;
+    font-weight: 500 !important;
+}
+.card-wrapper .product-tag-reviews .bestseller_tag{
+    background-color: #EBF094;
+    border-radius: 1.5rem;
+    line-height: 2.4rem;
+    text-transform: capitalize;
+    color: var(--primary-color);
+    padding: 0.4rem 1.4rem;
+}
+.card-wrapper .card .media{
+    aspect-ratio: 1;
+    background: #f5f0f4
+}
+.card-wrapper .card__information .card__heading{
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: normal;
+    color: var(--primary-color);
+}
+.card-wrapper .card__information .card__heading a{
+    color: var(--primary-color);
+}
+.card-wrapper .card__information .product-sub-text {
+    margin: 0.2rem 0 0;
+    color: rgb(36, 36, 41, 0.8);
+    font-weight: 400;
+    line-height: 2.4rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-wrapper .card-information>*:not(.visually-hidden:first-child)+*:not(.rating):not(.card__information-volume-pricing-note){
+    margin-top: 1.2rem;
+}
+.card-wrapper .card__information .price{
+    line-height: normal;
+}
+.card-wrapper .card__information .price .price-item{
+    font-weight: 500;
+    color: var(--primary-color);
+    line-height: normal;
+    letter-spacing: 0;
+    margin: 0 0.5rem 0 0;
+}
+.card-wrapper .quick-add-main{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.0rem;
+    align-items: flex-end;
+    margin-top: 1.6rem;
+    position: relative;
+    z-index: 1;
+}
+.card-wrapper .wishlist-wrapper{
+    width: 5.0rem;
+    height: 5.0rem;
+    background: var(--white-color);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-wrapper .wishlist-wrapper span{
+    display: flex;
+}
+.card-wrapper .quick-add{
+    width: calc(100% - 0rem);
+    margin: 0;
+}
+.card-wrapper .quick-add__submit::before,
+.card-wrapper .quick-add__submit::after{
+    display: none;
+}
+.card-wrapper .quick-add__submit{
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-family: var(--font-family-figtree);
+    letter-spacing: 0;
+    border-radius: 0.5rem;
+    line-height: normal;
+    min-height: 5.0rem;
+    transition: var(--webkit-transition-all);
+    color: var(--primary-color);
+}
+.card-wrapper .quick-add__submit:hover{
+    background: var(--secondary-color);
+    fill: var(--white-color);
+}
+.card-wrapper .card-bottom-content{
+    padding: 0rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 0rem 0rem 1.0rem 1.0rem;
+    border: 1px solid transparent;
+    transition: 0.2s;
+    -webkit-transition: 0.2s;
+}
+.card-wrapper .easy-bundle-view .quick-add, .card-wrapper .easy-bundle-view .quick-view-btn{
+    display: none;
+}
+.card-wrapper .easy-bundle-view .custom-bundle-button{
+    width: calc(100% - 6rem);
+    margin: 0;
+}
+.card-wrapper .easy-bundle-view a{
+    text-align: center;
+}
+
+.card-wrapper .card:hover .custom-bundle-button a{
+    text-decoration: none;
+}
+
+.card-wrapper .quick-view-btn modal-opener,
+.card-wrapper .quick-view-btn .quick-add__submit{
+    width: 100%;
+}
+.card-wrapper .quick-view-btn .quick-add__submit,
+.card-wrapper .card-bottom-content .quick-form-select{
+    background: #E9E8E6;
+    color: var(--primary-color);
+}
+.card-wrapper .card-bottom-content .select::before,
+.card-wrapper .card-bottom-content .select::after{
+    display: none
+}
+.card-wrapper .card-bottom-content .quick-form-select{
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 15px 26px 15px 16px;
+    font-family: var(--font-family-figtree);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    line-height: normal;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.card-wrapper .card-bottom-content .quick-form-select:focus-visible{
+    outline: none;
+    box-shadow:none;
+}
+.card-wrapper .card-bottom-content .select .svg-wrapper{
+    right: 16px;
+    width: 13px;
+    height: 13px;
+    transform: translateY(-50%);
+    top: 50%;
+}
+.card-wrapper .card-bottom-content .select .svg-wrapper .icon-caret{
+   width: 13px; 
+}
+.card-wrapper .quick-view-btn .quick-add__submit:hover{
+    background: var(--secondary-color);
+}
+/* Quick View Eye Button */
+.card-wrapper .quick-view-eye-btn{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 2;
+}
+.card-wrapper .quick-view-eye-btn .quick-add__submit{
+    min-height: 32px;
+    border-radius: 14px;
+    padding:2px 14px;
+}
+.card-wrapper .quick-view-eye-btn .quick-add__submit svg{
+    width: 20px;
+    height: 20px;
+}
+/* Responsive */
+@media screen and (min-width: 992px) {
+    .card-wrapper .card-bottom-content .quick-view-btn{
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        position: absolute;
+        left: 0;
+        bottom: 8.5rem;
+        padding: 2.6rem 2.0rem 0;
+        background: var(--white-color);
+        border: 0.1rem solid var(--primary-color);
+        border-bottom: 0;
+        width: 100%;
+        transform: translateY(0.5rem);
+        z-index: 1;
+    }
+    .card-wrapper .card:hover .card-bottom-content .quick-view-btn{
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+        transform: translateY(0);
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+    }
+    .card-wrapper .card:hover .card-bottom-content{
+        background: var(--white-color);
+        border-color: var(--primary-color);
+    }
+    .card-wrapper .card:hover .quick-add-main .quick-add__submit{
+        background: var(--secondary-color);
+        color: var(--white-color);
+    }
+}
+@media screen and (max-width: 991px) {
+    .card-wrapper  .card-information>*:not(.visually-hidden:first-child)+*:not(.rating):not(.card__information-volume-pricing-note){
+        margin-top: 1.0rem;
+    }
+    .card-wrapper .product-tag-reviews{padding: 0.6rem; left: 0;}
+    .card-wrapper .product-tag-reviews .bestseller_tag{margin-top: 32px; line-height: 15px; font-size: 1.2rem; padding: 0.4rem 1.8rem; font-weight: 500;}
+     .card-wrapper .product-tag-reviews .reviews-tag .yotpo-sr-bottom-line-score{    font-weight: 600 !important;
+    font-size: 12px !important; line-height: normal;}
+    .card-wrapper .card .card__content .card__information{padding: 1.2rem 1.0rem 0;}
+    .card-wrapper .card__information .card__heading{ font-size: 1.6rem;}
+    .card-wrapper .card__information .product-sub-text{line-height: normal; margin-top: 1.0rem;}
+    .card-wrapper .card__information .price .price-item{font-size: 1.3rem;}
+    .card-wrapper .card-bottom-content{padding: 0 1rem 1rem; position: relative; z-index: 1;}
+    .card-wrapper .quick-add-main{gap: 0.5rem; margin-top: 1.0rem;}
+    .card-wrapper .wishlist-wrapper{ width: 3.8rem; height: 3.8rem;}
+    .card-wrapper .quick-add, .card-wrapper .easy-bundle-view .custom-bundle-button{width: calc(100% - 4.3rem);}
+    .card-wrapper .quick-add__submit{ min-height: 3.8rem; background: var(--secondary-color);}
+    .card-wrapper .card-bottom-content .quick-view-btn{ margin-top: 1.0rem;}
+    .card-wrapper .card-bottom-content .quick-form-select{background: var(--white-color); border-radius: 5px; padding: 10px 26px 10px 10px;}
+    .card-wrapper .card-bottom-content .select .svg-wrapper{right: 10px;}
+    .card-wrapper .quick-view-btn .quick-add__submit{background: var(--white-color);}
+    .card-wrapper .quick-view-eye-btn{ left: 6px; top: 6px;}
+    .card-wrapper .quick-view-eye-btn .quick-add__submit{ min-height: 24px; padding: 0 10px;}
+    .card-wrapper .card-bottom-content .select .svg-wrapper .icon-caret{width: 11px;}
+    .card-wrapper:hover .card__media .media img+img{opacity: 1 !important;}
+}
+@media screen and (max-width: 767px) {
+    .card-wrapper .card-product-color h6 small{ display: none;}
+    .card-wrapper .quick-add__submit{ font-size: 14px; letter-spacing: -0.4px;}
+    .card-wrapper .hide-mobile-price { display: none; }
+}
+@media screen and (max-width:419px) {
+.card-wrapper .easy-bundle-view a{
+    font-size: 12px;
+}
+}
+

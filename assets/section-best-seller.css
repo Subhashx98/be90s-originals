@@ -1,0 +1,138 @@
+.best-seller{
+    padding-bottom: 8.0rem;
+}
+.best-seller .best-seller-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3.2rem;
+    width: 100%;
+    position: relative;
+}
+.best-seller .best-seller-heading .left-text{
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+.best-seller .best-seller-heading .left-text ul.choose-color{
+    display: flex;
+    align-items: center;
+    padding-left: 2.4rem;
+    margin-left: 2.4rem;
+    border-left: 0.2rem solid #DDDDDD;
+    gap: 0.8rem;
+}
+.best-seller .best-seller-heading .left-text ul.choose-color li{
+    display: flex;
+}
+.best-seller .best-seller-heading .left-text ul.choose-color li span{
+    width: 26px;
+    height: 26px;
+    outline-offset: 4px;
+    outline: 1.8px solid var(--grey-color);
+    min-width: 22px;
+    margin: 0 10px 0 0;
+    border-radius: 50%;
+    box-shadow: 0 0 4px 2px #00000014;
+    cursor: pointer;
+    position: relative;
+    display: block;
+}
+
+/* Tooltip */
+.choose-color li span::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+/* Tooltip arrow */
+/* .choose-color li span::before {
+  content: "";
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #333;
+  opacity: 0;
+  transition: opacity 0.2s;
+} */
+
+/* Show tooltip on hover */
+.choose-color li span:hover::after,
+.choose-color li span:hover::before {
+  opacity: 1;
+}
+
+.best-seller .best-seller-heading .right-text{
+    gap: 2.4rem;
+    display: flex;
+    align-items: center;
+}
+.best-seller .best-seller-heading .right-text .best-seller-arrow{
+    display: flex;
+    align-items: center;
+    gap: 1.0rem;
+}
+.best-seller .best-seller-content{
+    width: 100%;
+}
+.best-seller .best-seller-slider .slick-list{
+    margin: 0 -1.0rem;
+}
+.best-seller .best-seller-slider .slick-track{
+    display: flex;
+}
+.best-seller .best-seller-slider .slick-slide{
+    padding: 0 1.0rem;
+    height: auto;
+}
+.best-seller .best-seller-slider:not(.slick-initialized){
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.0rem;
+}
+.best-seller .best-seller-slider:not(.slick-initialized) .slick-slide{
+    display: block;
+    width: 100%;
+}
+.best-seller .best-seller-slider:not(.slick-initialized) .slick-slide:nth-child(n+5) {
+  display: none !important;
+}
+.best-seller-arrow .seller-slick-prev.slick-prev:not(.slick-arrow), .best-seller-arrow .seller-slick-next.slick-next:not(.slick-arrow) {
+    display: none !important;
+}
+.best-seller .best-seller-heading .left-text ul.choose-color li span.active {
+    outline: 1.8px solid #000;
+}
+/* Responsive */
+@media screen and (max-width: 991px) {
+    .best-seller{ padding: 0 0 4.0rem; margin-bottom: 4.0rem; border-bottom: 0.1rem solid var(--grey-color);}
+    .best-seller .best-seller-heading{margin-bottom: 2.8rem;}
+    .best-seller .best-seller-heading .left-text ul.choose-color{padding-left: 1.6rem; margin-left: 1.6rem;}
+    .best-seller .best-seller-heading .left-text ul.choose-color li span{ width: 2.4rem; height: 2.4rem;}
+    .best-seller .best-seller-heading .right-text{ gap: 1.0rem;}
+    .best-seller .best-seller-slider .slick-list{ margin: 0 -0.5rem;}
+    .best-seller .best-seller-slider .slick-slide{ padding: 0 0.5rem; }
+    .best-seller .best-seller-heading .right-text .view-link{ display: none;}
+}
+@media screen and (max-width: 767px) {
+    .best-seller .best-seller-heading{ justify-content: center;}
+    .best-seller .best-seller-heading .left-text{text-align: center;padding: 0 5.0rem;}
+    .best-seller .best-seller-heading .left-text ul.choose-color{ display: none;}
+    .best-seller .best-seller-heading .right-text .best-seller-arrow{ position: absolute;
+    right: 0; left: 0; margin: 0 auto; justify-content: space-between;}
+}

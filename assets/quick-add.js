@@ -39,7 +39,34 @@ if (!customElements.get('quick-add-modal')) {
             }
             if (window.ProductModel) window.ProductModel.loadShopifyXR();
 
+            // Remove empty <p> tags
+            $('.product-description-main').find('p').each(function() {
+              const text = $(this).text().trim();
+              const html = $(this).html().trim();
+              if (!text || html === '&nbsp;') $(this).remove();
+            });
+
+            // Handle "Read More" button visibility
+            const $desc = $('.product-description-main');
+            const $readMore = $('.read-more-link');
+
+            $desc.find('p[style*="display: none"]').remove();
+            if ($desc.length && $readMore.length) {
+              const lineHeight = parseFloat($desc.css('line-height')) || 16;
+              const maxHeight = lineHeight * 3;
+              const descHeight = $desc[0].scrollHeight;
+              if (descHeight > maxHeight) {
+                $readMore[0].style.setProperty('display', 'block', 'important');
+              } else {
+                $readMore[0].style.setProperty('display', 'none', 'important');
+              }
+            }
+            
+
             super.show(opener);
+            if (typeof yotpoWidgetsContainer !== 'undefined') {
+              yotpoWidgetsContainer.initWidgets(false);
+            }
           })
           .finally(() => {
             opener.removeAttribute('aria-disabled');
@@ -62,6 +89,9 @@ if (!customElements.get('quick-add-modal')) {
 
       preventVariantURLSwitching(productElement) {
         productElement.setAttribute('data-update-url', 'false');
+        setTimeout(() => {
+          window.yotpo.initWidgets();
+        }, 100);
       }
 
       removeDOMElements(productElement) {

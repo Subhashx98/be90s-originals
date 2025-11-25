@@ -1,0 +1,218 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{%- if section.settings.quick_add == 'standard' -%}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if section.settings.quick_add == 'bulk' -%}
+  <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{{ 'custom-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-best-seller.css' | asset_url | stylesheet_tag }}
+
+<div class="best-seller">
+  <div class="page-width">
+    <div class="best-seller-heading">
+      <div class="left-text">
+        {% if section.settings.title != blank %}
+          <h2>{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {%- assign swatchColors = settings.swatchColors | newline_to_br | split: '<br />' -%}
+        {% assign unique_colors = '' %}
+
+        <ul class="choose-color">
+          {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+            {% if product.metafields.custom.color_new %}
+              {% assign colors = product.metafields.custom.color_new.value %}
+              {% for color in colors %}
+                {% unless unique_colors contains color %}
+                  {%- liquid
+                    for colorData in swatchColors
+                      assign colorDataArr = colorData | split: ':'
+                      assign ruleName = colorDataArr[0] | strip
+                      if color == ruleName
+                        assign colorCodes = colorDataArr[1]
+                        break
+                      else 
+                        assign colorCodes = color
+                      endif
+                    endfor
+                  -%}
+                  {% assign unique_colors = unique_colors | append: color | append: ',' %}
+                  <li>
+                    <span data-color="{{ color }}" style="background-color: {{ colorCodes }};" data-tooltip="{{ color }}"></span>
+                  </li>
+                {% endunless %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="right-text">
+        {% if section.settings.cta_url != blank and section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_url }}" class="view-link">{{ section.settings.cta_text }}</a>
+        {% endif %}
+        <div class="best-seller-arrow">
+          <button class="seller-slick-prev slick-prev slick-arrow">Prev</button>
+          <button class="seller-slick-next slick-next slick-arrow">Next</button>
+        </div>
+      </div>
+    </div>
+    <div class="best-seller-content">
+      <div class="best-seller-slider">
+        {%- if section.settings.collection.products.size > 0 -%}
+          {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+            {% if product.metafields.custom.color_new %}
+              {% assign product_colors = product.metafields.custom.color_new.value | join: ',' %}
+            {% else %}
+              {% assign product_colors = '' %}
+            {% endif %}
+
+            <div class="slick-slide" data-colors="{{ product_colors }}">
+              {% render 'card-product',
+                card_product: product,
+                section_id: section.id,
+                quick_add: section.settings.quick_add,
+                show_secondary_image: section.settings.show_secondary_image
+              %}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      {% if section.settings.cta_url != blank and section.settings.cta_text != blank %}
+        <a href="{{ section.settings.cta_url }}" class="view-all-mobile primary-btn white-btn">
+          {{- section.settings.cta_text -}}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  function initBestSellerSlider() {
+    $('.best-seller-slider').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      infinite: false,
+      arrows: true,
+      prevArrow: $('.seller-slick-prev'),
+      nextArrow: $('.seller-slick-next'),
+      responsive: [
+        { breakpoint: 1024, settings: { slidesToShow: 3 } },
+        { breakpoint: 768, settings: { slidesToShow: 2 } },
+        { breakpoint: 480, settings: { slidesToShow: 2 } },
+      ],
+    });
+  }
+
+  $(document).ready(function () {
+    initBestSellerSlider();
+
+    $(document).on('click', '.choose-color span', function () {
+      var $this = $(this);
+      var selectedColor = $this.data('color');
+      var $slider = $('.best-seller-slider');
+
+      // If already active → reset
+      if ($this.hasClass('active')) {
+        $this.removeClass('active');
+        $slider.slick('slickUnfilter');
+        $slider.slick('setPosition');
+        return;
+      }
+
+      // Otherwise, activate this color
+      $('.choose-color span').removeClass('active');
+      $this.addClass('active');
+
+      // Reset + apply filter
+      $slider.slick('slickUnfilter');
+      $slider.slick('slickFilter', function () {
+        var colors = $(this).data('colors');
+        if (!colors) return false;
+
+        var colorArray = colors.split(',');
+        return colorArray.includes(selectedColor);
+      });
+
+      $slider.slick('setPosition');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Best Seller",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Recommended Image size: 345 x 345"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 25,
+      "step": 1,
+      "default": 4,
+      "label": "Product to Show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+    },
+    {
+      "type": "select",
+      "id": "quick_add",
+      "default": "none",
+      "label": "t:sections.main-collection-product-grid.settings.quick_add.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_1"
+        },
+        {
+          "value": "standard",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Seller",
+      "category": "Custom Homepage" 
+    }
+  ]
+}
+{% endschema %}
