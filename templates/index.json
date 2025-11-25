@@ -79,7 +79,7 @@
         "products_to_show": 25,
         "show_secondary_image": true,
         "quick_add": "standard",
-        "cta_text": "Explore All",
+        "cta_text": "View All",
         "cta_url": "shopify://collections/tops"
       }
     }
