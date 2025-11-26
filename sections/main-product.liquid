@@ -853,7 +853,7 @@
                 {{ product.description }}
               </div>
             {%- endif -%}
-            <div class="payment-security">
+            {% comment %} <div class="payment-security">
               <h2>Payment & Security</h2>
               <div class="product-payment">
                 <a href="#">
@@ -915,7 +915,7 @@
                 Your payment information is processed securely. We do not store credit card details nor have access to
                 your credit card information.
               </p>
-            </div>
+            </div> {% endcomment %}
           </div>
         {% endif %}
       </div>

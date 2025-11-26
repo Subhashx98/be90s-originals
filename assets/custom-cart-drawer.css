@@ -120,7 +120,7 @@
     margin-top: 0;
 }
 .cart-drawer .cart-items-table .cart-items .cart-item .cart-item__image {
-    aspect-ratio: 1;
+    border-radius: 8px;
     justify-self: center;
     display: flex;
     object-fit: cover;
