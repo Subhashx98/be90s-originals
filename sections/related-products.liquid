@@ -6,19 +6,31 @@
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
 
-  @media screen and (min-width: 750px) {
+{%- if section.settings.quick_add == 'standard' -%}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if section.settings.quick_add == 'bulk' -%}
+  <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- style -%}
+  @media screen and (min-width: 990px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 {%- endstyle -%}
+{{ 'custom-card.css' | asset_url | stylesheet_tag }}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <product-recommendations
@@ -28,36 +40,103 @@
     data-product-id="{{ product.id }}"
   >
     {% if recommendations.performed and recommendations.products_count > 0 %}
-      <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
-        {{ section.settings.heading }}
-      </h2>
+      <div class="related-products__heading">
+        <h2 class=" inline-richtext">
+          {{ section.settings.heading }}
+        </h2>
+        <div class="related-products-right">
+          <a href="#" class="view-link">View All</a>
+          <div class="slider-arrows">
+            <button class="related-slick-prev slick-prev slick-arrow">Prev</button>
+            <button class="related-slick-next slick-next slick-arrow">Next</button>
+          </div>
+        </div>
+      </div>
       <ul
-        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+        class="related-product-slider grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
         role="list"
       >
-        {% assign skip_card_product_styles = false %}
+        {% if product.metafields.custom.related_products.value != blank and product.metafields.custom.related_products.value.size > 0 %}
+        {%- assign related_items = product.metafields.custom.related_products.value -%}
+        {% for related_product in related_items %}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: related_product,
+              quick_add: section.settings.quick_add,
+              show_secondary_image: section.settings.show_secondary_image
+            %}
+          </li>
+        {% endfor %}
+      {% else %}
         {% for recommendation in recommendations.products %}
           <li class="grid__item">
             {% render 'card-product',
               card_product: recommendation,
-              media_aspect_ratio: section.settings.image_ratio,
-              image_shape: section.settings.image_shape,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: section.settings.show_vendor,
-              show_rating: section.settings.show_rating,
-              skip_styles: skip_card_product_styles
+              quick_add: section.settings.quick_add,
+              show_secondary_image: section.settings.show_secondary_image
             %}
           </li>
-          {%- assign skip_card_product_styles = true -%}
         {% endfor %}
+      {% endif %}
       </ul>
+     <a href="#" class="view-link view-link-mobile">View All</a>
     {% endif %}
   </product-recommendations>
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}
   {%- endif -%}
 </div>
+<!-- Script -->
+<script>
+  $(document).ready(function () {
+    function slickCarousel() {
+      if (!$('.related-product-slider').hasClass('slick-initialized')) {
+        $('.related-product-slider').slick({
+          infinite: true,
+          arrows: true,
+          autoplay: false,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          prevArrow: $('.related-slick-prev'),
+          nextArrow: $('.related-slick-next'),
+          responsive: [
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 3,
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2,
+              },
+            },
+          ],
+        });
+      }
+    }
 
+    // Initial check
+    const checkForSlider = setInterval(function () {
+      if ($('.related-product-slider').length) {
+        slickCarousel();
+        yotpoWidgetsContainer.initWidgets();
+        clearInterval(checkForSlider);
+      }
+    }, 200);
+
+    // Reinitialize on window resize
+    $(window).on('resize', function () {
+      slickCarousel();
+    });
+
+    // Reinitialize on Shopify section load
+    document.addEventListener('shopify:section:load', function (event) {
+      slickCarousel();
+    });
+  });
+</script>
 {% schema %}
 {
   "name": "t:sections.related-products.name",
@@ -73,34 +152,6 @@
       "id": "heading",
       "default": "t:sections.related-products.settings.paragraph__1.default",
       "label": "t:sections.related-products.settings.heading.label"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
-        }
-      ],
-      "default": "h1",
-      "label": "t:sections.all.heading_size.label"
     },
     {
       "type": "range",
@@ -134,7 +185,7 @@
           "value": "2",
           "label": "t:sections.related-products.settings.columns_mobile.options__2.label"
         }
-      ]    
+      ]
     },
     {
       "type": "color_scheme",
@@ -225,6 +276,22 @@
       "default": false,
       "label": "t:sections.related-products.settings.show_rating.label",
       "info": "t:sections.related-products.settings.show_rating.info"
+    },
+    {
+      "type": "select",
+      "id": "quick_add",
+      "default": "none",
+      "label": "t:sections.main-collection-product-grid.settings.quick_add.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_1"
+        },
+        {
+          "value": "standard",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
+        }
+      ]
     },
     {
       "type": "header",
