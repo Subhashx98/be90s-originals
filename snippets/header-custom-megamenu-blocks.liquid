@@ -24,7 +24,7 @@
             {% for link in link.links %}
               <li
                 data-id="{{ link.title | handleize }}"
-                {% if forloop.index == 4 %}
+                {% if forloop.index == 3 %}
                   class="active-item"
                 {% endif %}
               >
@@ -38,7 +38,7 @@
           {% for link in link.links %}
             <div
               id="{{ link.title | handleize }}"
-              class="second-level-menu {% if forloop.index == 4 %}active{% endif %}"
+              class="second-level-menu {% if forloop.index == 3 %}active{% endif %}"
             >
               <!-- Mobile Title -->
               {% for block in section.blocks %}
