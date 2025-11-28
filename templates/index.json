@@ -12,11 +12,74 @@
     "section_home_banner_9KDWpD": {
       "type": "section-home-banner",
       "blocks": {
+        "marquee_slider_CJ9JqF": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "Ultra-Soft Feel"
+          }
+        },
         "marquee_slider_d7GBkL": {
           "type": "marquee_slider",
           "settings": {
-            "icon": "shopify://shop_images/soft-cotton-fiber-icon-minimal-line-style-folded-cloth-shape-716e41-highlight-accents.png",
+            "icon": "shopify://shop_images/Group_32_1.png",
             "title": "Premium Cotton Fabric"
+          }
+        },
+        "marquee_slider_hHBeiX": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "Streetwear Approved"
+          }
+        },
+        "marquee_slider_ajKwkg": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "Perfect Oversized Fit"
+          }
+        },
+        "marquee_slider_BEfbrc": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "Fade-Resistant Colors"
+          }
+        },
+        "marquee_slider_43xhRy": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "Long-Lasting Print Quality"
+          }
+        },
+        "marquee_slider_k7j6zj": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "Sweat-Proof Comfort"
+          }
+        },
+        "marquee_slider_ynEBXh": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "All-Season Wear"
+          }
+        },
+        "marquee_slider_wXdhqr": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "Skin-Friendly Material"
+          }
+        },
+        "marquee_slider_ac4aUt": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/Group_32_1.png",
+            "title": "Made for Daily Hustle"
           }
         },
         "banner_block_iz6Wmc": {
@@ -70,7 +133,16 @@
         }
       },
       "block_order": [
+        "marquee_slider_CJ9JqF",
         "marquee_slider_d7GBkL",
+        "marquee_slider_hHBeiX",
+        "marquee_slider_ajKwkg",
+        "marquee_slider_BEfbrc",
+        "marquee_slider_43xhRy",
+        "marquee_slider_k7j6zj",
+        "marquee_slider_ynEBXh",
+        "marquee_slider_wXdhqr",
+        "marquee_slider_ac4aUt",
         "banner_block_iz6Wmc",
         "banner_block_QPaVzM",
         "banner_block_KRiKrf"
