@@ -125,6 +125,7 @@
     "cart_type": "drawer",
     "show_vendor": true,
     "show_cart_note": true,
+    "shipping_message": "You're just [amount] away from free shipping!",
     "cart_drawer_collection": "tops",
     "cart_color_scheme": "scheme-1",
     "sections": {
