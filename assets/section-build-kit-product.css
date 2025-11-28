@@ -1,0 +1,198 @@
+.shop-the-look__product {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 30.0rem;
+    left: 0;
+    bottom: calc(100% + 2.0rem);
+    max-width: 52vw;
+    padding: 1.6rem;
+    background: var(--white-color);
+    border-radius: 1.0rem;
+    box-shadow: 0px 0.4rem 1rem 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 0.4rem 1rem 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0.4rem 1rem 0px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .4s cubic-bezier(.75, 0, .175, 1), opacity .4s cubic-bezier(.75, 0, .175, 1), transform .4s cubic-bezier(.75, 0, .175, 1);
+    will-change: transform;
+    transform-origin: top left;
+    z-index: 1;
+}
+.shop-the-look__product[open] {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1) translateY(-50%)
+}
+.shop-the-look__product--reverse {
+    left: auto;
+    right: 0;
+    transform-origin: top right;
+}
+.shop-the-look__product .card-wrapper {
+    background: transparent;
+    border-radius: 0;
+}
+.shop-the-look__product .card-wrapper .card{
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+}
+.shop-the-look__product .card-wrapper .card .product-tag-reviews{
+    display: none;
+}
+.shop-the-look__product .card-wrapper .card .card__inner{
+    min-width: 10rem;
+    width: 10rem;
+    background: transparent;
+}
+.shop-the-look__product .card-wrapper .card .card__inner .media{
+    display: flex;
+    background: #F6F6F6;
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+}
+.shop-the-look__product .card-wrapper .card__content{
+    width: calc(100% - 10.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.shop-the-look__product .card-wrapper .card .card__information > *,
+.shop-the-look__product .card-wrapper .card .card__information .card-information > *{
+    display: none;
+}
+.shop-the-look__product .card-wrapper .card .card__content .card__information{
+    padding: 0;
+}
+.shop-the-look__product .card-wrapper .card .card__information h3{
+    display: block;
+    font-weight: 500;
+    font-size: 1.6rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.shop-the-look__product .card-wrapper .card .card__information> .card-information{
+    display: block;
+}
+.shop-the-look__product .card-wrapper .card .card__information> .card-information .price{
+    display: block;
+    color: rgba(36, 36, 41, 0.8);
+    font-size: 1.4rem;
+    line-height: normal;
+    letter-spacing: 0;
+    margin: 6px 0 0!important;
+}
+.shop-the-look__product .card-wrapper .card .card-bottom-content{
+    padding: 0;
+    border: 0;
+}
+.shop-the-look__product .card-wrapper .card .card-bottom-content .card-content-variant{
+    display: none;
+}
+.shop-the-look__product .card-wrapper .quick-add-main{
+    margin: 0;
+}
+.shop-the-look__product .card-wrapper .quick-add-main .wishlist-wrapper{
+    display: none;
+}
+.shop-the-look__product .card-wrapper .quick-add{
+    width: 100%;
+}
+.shop-the-look__product .card-wrapper .quick-add-main .quick-add__submit{
+    background: #F5F6F6;
+    border: 0.1rem solid var(--grey-color);
+    width: 100%;
+    padding: 0.6rem;
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    line-height: 2.0rem;
+    border-radius: 0.5rem;
+    font-weight: 400;
+    min-height: 3.4rem;
+}
+.shop-the-look__product .card-wrapper .quick-add-main .quick-add__submit:hover{
+    background-color: var(--primary-color);;
+    color: var(--white-color);
+}
+.shop-the-look__product .card-wrapper .quick-add-main .quick-add__submit::before,
+.shop-the-look__product .card-wrapper .quick-add-main .quick-add__submit::after{
+    display: none;
+}
+.shop-the-look__product .card-wrapper .quick-view-btn{
+    display: none;
+}
+/* Plus Minus button */
+.shop-the-look__dot {
+    content: "";
+    background: var(--white-color);
+    border-radius: 50%;
+    width: 4.0rem;
+    height: 4.0rem;
+    box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.16);
+    -webkit-box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.16);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--webkit-transition-all);
+}
+.shop-the-look__dot:after {
+    content: "";
+    background: url(icon-plus.svg) center no-repeat;
+    background-size: 1.4rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    display: flex;
+}
+.shop-the-look__product-wrapper:hover .shop-the-look__dot:after {
+    background: url(icon-minus-product.svg) center no-repeat;
+    background-size: 1.4rem;
+}
+.shop-the-look__item-list .shop-the-look__image-wrapper {
+    position: relative
+}
+.shop-the-look__item {
+    position: relative;
+    display: block
+}
+.shop-the-look__item[hidden] {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1
+}
+
+.shop-the-look__item[hidden] .drawer,
+.shop-the-look__item[hidden] .popover {
+    display: none
+}
+.shop-the-look__product-wrapper {
+    position: absolute
+}
+.shop-the-look__product-wrapper:hover .shop-the-look__product {
+    opacity: 1;
+    visibility: visible
+}
+.shop-the-look__product .card-wrapper .quick-view-eye-btn{ display: none;}
+/* Responsive */
+@media screen and (max-width: 1200px) {
+    .shop-the-look__product {width: 26rem;}
+}
+@media screen and (max-width: 991px) {
+   .shop-the-look__dot{ width: 2.2rem; height: 2.2rem;}
+   .shop-the-look__dot:after{ background-size: 1.0rem; width: 1.2rem; height: 1.2rem;}
+   .shop-the-look__product{padding: 0.8rem;}
+   .shop-the-look__product .card-wrapper .card .card__inner{min-width: 6rem;width: 6rem;}
+   .shop-the-look__product .card-wrapper .card .card__information h3{ font-size: 1.3rem;}
+   .shop-the-look__product .card-wrapper .card__information .price .price-item{ font-size: 1.2rem;}
+   .shop-the-look__product .card-wrapper .quick-add-main .quick-add__submit{min-height: 3.0rem;font-size: 1.2rem; 
+    line-height: 1.8rem; color: var(--white-color); background: var(--primary-color);}
+}
+

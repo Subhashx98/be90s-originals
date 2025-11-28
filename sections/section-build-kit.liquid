@@ -1,0 +1,577 @@
+{{ 'section-build-kit.css' | asset_url | stylesheet_tag }}
+{{ 'section-build-kit-product.css' | asset_url | stylesheet_tag }}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{%- if section.settings.quick_add == 'standard' -%}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if section.settings.quick_add == 'bulk' -%}
+  <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<style>
+  /* Position the dots */
+  {%- for i in (1..6) -%}
+    #block-{{ section.id }}-{{ forloop.index }} {
+      {%- capture product_horizontal_position_option -%}product_{{ i }}_horizontal_position{%- endcapture -%}
+      {%- capture product_vertical_position_option -%}product_{{ i }}_vertical_position{%- endcapture -%}
+
+      top: {{ section.settings[product_vertical_position_option] }}%;
+      left: {{ section.settings[product_horizontal_position_option] }}%;
+    }
+
+    @media screen and (max-width:749px){
+      #block-{{ section.id }}-{{ forloop.index }} {
+        {%- capture mobile_product_horizontal_position_option -%}mobile_product_{{ i }}_horizontal_position{%- endcapture -%}
+        {%- capture mobile_product_vertical_position_option -%}mobile_product_{{ i }}_vertical_position{%- endcapture -%}
+
+        top: {{ section.settings[mobile_product_vertical_position_option] }}%;
+        left: {{ section.settings[mobile_product_horizontal_position_option] }}%;
+      }
+    }
+  {%- endfor -%}
+</style>
+
+<div class="build-system-kit">
+  <div class="page-width">
+    <div class="build-kit-main">
+      <div class="build-kit-image">
+        {%- capture look_id -%}block-{{ section.id }}{%- endcapture -%}
+        <shop-the-look-item id="{{ look_id }}" class="shop-the-look__item" {{ section.shopify_attributes }}>
+          <div class="shop-the-look__image-wrapper">
+            {%- if section.settings.image != blank -%}
+              {%- capture class_attribute -%}shop-the-look__image lazyload desktop_image {%- endcapture -%}
+              {%- capture class_mobile_attribute -%}shop-the-look__image lazyload mobile_image {%- endcapture -%}
+              {% assign dataimg_src = settings.logo | img_url %}
+              <div class="product-selection">
+                {%- if section.settings.reveal_on_scroll and forloop.first -%}
+                  {{-
+                    section.settings.image
+                    | image_url: width: section.settings.image.width
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000',
+                      class: class_attribute,
+                      reveal: true,
+                      data-src: dataimg_src
+                  -}}
+                {%- else -%}
+                  {{-
+                    section.settings.image
+                    | image_url: width: section.settings.image.width
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000',
+                      class: class_attribute,
+                      alt: shop.name,
+                      data-src: dataimg_src
+                  -}}
+                {%- endif -%}
+
+                {% assign mobile_image = section.settings.image %}
+                {% if section.settings.mobile_image != blank %}
+                  {% assign mobile_image = section.settings.mobile_image %}
+                {% endif %}
+                {{-
+                  mobile_image
+                  | image_url: width: mobile_image.width
+                  | image_tag:
+                    loading: 'lazy',
+                    alt: shop.name,
+                    widths: '500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000',
+                    class: class_mobile_attribute,
+                    data-src: dataimg_src
+                -}}
+
+                {%- for i in (1..6) -%}
+                  {%- capture product_option -%}product_{{ i }}{%- endcapture -%}
+                  {%- capture product_horizontal_position_option -%}product_{{ i }}_horizontal_position{%- endcapture -%}
+                  {%- capture product_vertical_position_option -%}product_{{ i }}_vertical_position{%- endcapture -%}
+
+                  {% if section.settings[product_option] != blank %}
+                    {% for selected_product in section.settings[product_option] %}
+                      {%- assign product = selected_product -%}
+                      {% break %}
+                    {% endfor %}
+                  {% else %}
+                    {%- assign product = '' -%}
+                  {% endif %}
+                  {%- if product != blank -%}
+                    <div
+                      id="{{ look_id }}-{{ i }}"
+                      class="shop-the-look__product-wrapper {{ product }}"
+                    >
+                      <button
+                        type="button"
+                        id="shop-the-look__dot-{{ forloop.index }}"
+                        is="toggle-button"
+                        {% if section.settings.reveal_on_scroll or forloop.parentloop.first == false %}
+                          reveal
+                        {% endif %}
+                        class="shop-the-look__dot tap-area shop-drop-btn"
+                        aria-controls="{{ look_id }}-{{ forloop.index }}-product"
+                        aria-expanded="false"
+                        data-pid="{{ product.id }}"
+                        data-index="{{ i }}"
+                      >
+                        <span class="visually-hidden">Hot spot Dot - {{ forloop.index }}</span>
+                      </button>
+
+                      <openable-element
+                        id="shop-the-look__dot-{{ forloop.index }}"
+                        class="shop-the-look__product {% if section.settings[product_horizontal_position_option] > 50 %}shop-the-look__product--reverse{% endif %}"
+                      >
+                        {% render 'card-product',
+                          card_product: product,
+                          section_id: section.id,
+                          quick_add: section.settings.quick_add
+                        %}
+                      </openable-element>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </shop-the-look-item>
+      </div>
+      <div class="build-kit-content">
+        {% if section.settings.title != blank %}
+          <h2>{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          {{ section.settings.description }}
+        {% endif %}
+        {%- if section.blocks.size > 0 -%}
+        <ul>
+          {% for block in section.blocks %}
+            {% if block.type == 'Product_details' %}
+              <li>
+                {% if block.settings.icon != blank %}
+                  <img
+                    src="{{ block.settings.icon | image_url }}"
+                    height="32"
+                    width="32"
+                    alt="{{ block.settings.icon.alt |  default: block.settings.text |  default: 'BE90s Originals' }}"
+                    loading="lazy"
+                  >
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <span>{{ block.settings.text }}</span>
+                {% endif %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% if section.settings.cta_url != blank and section.settings.button_text != blank %}
+          <a href="{{ section.settings.cta_url }}" class="primary-btn black-btn">{{ section.settings.button_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Build Your System Kit",
+  "settings": [
+    {
+      "type": "select",
+      "id": "quick_add",
+      "default": "none",
+      "label": "t:sections.main-collection-product-grid.settings.quick_add.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_1"
+        },
+        {
+          "value": "standard",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Image Look"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image Banner 1",
+      "info": "Recommended Image size: 575 x 570"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image Banner",
+      "info": "Recommended Image size: 325 x 320"
+    },
+    {
+      "type": "header",
+      "content": "Product 1"
+    },
+    {
+      "type": "product_list",
+      "id": "product_1",
+      "label": "Product",
+      "limit": 1
+    },
+    {
+      "type": "range",
+      "id": "product_1_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "product_1_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_1_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_1_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Vertical position",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Product 2"
+    },
+    {
+      "type": "product_list",
+      "id": "product_2",
+      "label": "Product",
+      "limit": 1
+    },
+    {
+      "type": "range",
+      "id": "product_2_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "product_2_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_2_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_2_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Vertical position",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Product 3"
+    },
+    {
+      "type": "product_list",
+      "id": "product_3",
+      "label": "Product",
+      "limit": 1
+    },
+    {
+      "type": "range",
+      "id": "product_3_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "product_3_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_3_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_3_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Vertical position",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Product 4"
+    },
+    {
+      "type": "product_list",
+      "id": "product_4",
+      "label": "Product",
+      "limit": 1
+    },
+    {
+      "type": "range",
+      "id": "product_4_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "product_4_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_4_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_4_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Vertical position",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Product 5"
+    },
+    {
+      "type": "product_list",
+      "id": "product_5",
+      "label": "Product",
+      "limit": 1
+    },
+    {
+      "type": "range",
+      "id": "product_5_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "product_5_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_5_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_5_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Vertical position",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Product 6"
+    },
+    {
+      "type": "product_list",
+      "id": "product_6",
+      "label": "Product",
+      "limit": 1
+    },
+    {
+      "type": "range",
+      "id": "product_6_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "product_6_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Vertical position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_6_horizontal_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Horizontal position",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_product_6_vertical_position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Vertical position",
+      "default": 30
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Product Button Text"
+    },
+    {
+      "type": "header",
+      "content": "Kit Information"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Product_details",
+      "name": "Product Details",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Recommended Icon size: 32 x 32"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Build Your System Kit",
+      "category": "Custom Homepage"
+    }
+  ]
+}
+{% endschema %}

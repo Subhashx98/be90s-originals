@@ -1,0 +1,109 @@
+.build-system-kit{
+    background: var(--light-yellow-color);
+    padding: 7.0rem 0;
+    border-radius: 2.0rem;
+    margin: 0rem 1.0rem 8.0rem;
+    width: calc(100% - 2.0rem);
+}
+.build-system-kit .build-kit-main{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8.6rem;
+}
+/* Left */
+.build-system-kit .build-kit-image{
+    padding: 3.6rem 6.6rem;
+    border-radius: 2.0rem;
+    background: var(--white-color);
+    display: flex;
+    flex-wrap: wrap;
+    width: 49%;
+    position: relative;
+}
+.build-system-kit .build-kit-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.build-system-kit .build-kit-image .mobile_image {
+    display: none;
+}
+.build-system-kit .build-kit-image .desktop_image {
+    display: block;
+}
+/* Right */
+.build-system-kit .build-kit-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(51% - 8.6rem);
+}
+.build-system-kit .build-kit-content h2{
+    width: 100%;
+}
+.build-system-kit .build-kit-content p{
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 2.8rem;
+    margin: 1.6rem 0 0;
+}
+.build-system-kit .build-kit-content ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 100%;
+    border-top: 0.1rem solid rgba(36, 36, 41, 0.08);
+    border-bottom: 0.1rem solid rgba(36, 36, 41, 0.08);
+    padding: 2.4rem 0;
+    margin-top: 2.4rem;
+    gap: 2.4rem;
+}
+.build-system-kit .build-kit-content ul li{
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    min-width: 36%;
+}
+.build-system-kit .build-kit-content ul li img{
+    width: 3.2rem;
+    height: 3.2rem;
+    object-fit: contain;
+}
+.build-system-kit .build-kit-content ul li span{
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    font-weight: 500;
+}
+.build-system-kit .build-kit-content .primary-btn{
+    margin-top: 2.4rem;
+    padding: 2.6rem 4rem;
+    min-width: 21.6rem;
+}
+/* Responsive */
+@media screen and (max-width: 1200px) {
+    .build-system-kit .build-kit-main{gap: 4.2rem;}
+    .build-system-kit .build-kit-image{ width: 50%; padding: 0 1.8rem;}
+    .build-system-kit .build-kit-content{width: calc(50% - 4.2rem);}
+    .build-system-kit .build-kit-content ul{ column-gap: 2.0rem; row-gap: 1.0rem;}
+    .build-system-kit .build-kit-content ul li{min-width: calc(50% - 1.6rem);  width: calc(50% - 1.6rem);}
+}
+@media screen and (max-width: 991px) {
+    .build-system-kit{ padding: 2rem 0; margin: 0rem 1rem 4rem;}
+    .build-system-kit .build-kit-main{gap: 2.0rem;}
+    .build-system-kit .build-kit-image{border-radius: 1rem; padding: 0 1.8rem;}
+    .build-system-kit .build-kit-image img.main-image{ min-height: 32.6rem;}
+    .build-system-kit .build-kit-image .mobile_image { display: block;}
+    .build-system-kit .build-kit-image .desktop_image { display: none; }
+    .build-system-kit .build-kit-content{ width: calc(50% - 2.0rem);}
+    .build-system-kit .build-kit-content p{font-size: 1.6rem; line-height: 2.4rem; margin: 1.0rem 0 0;}
+    .build-system-kit .build-kit-content ul li{gap: 1.0rem; width: auto; min-width: auto;}
+    .build-system-kit .build-kit-content ul li img{ width: 2.4rem; height: 2.4rem;}
+    .build-system-kit .build-kit-content ul li span{font-size: 1.4rem; line-height: 2.2rem; font-weight: 400;}
+    .build-system-kit .build-kit-content .primary-btn{ width: 100%; padding: 2.3rem 2rem;}
+}
+@media screen and (max-width: 767px) {
+   .build-system-kit .build-kit-image,
+   .build-system-kit .build-kit-content{ width: 100%;}
+}
