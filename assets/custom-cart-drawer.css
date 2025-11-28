@@ -225,6 +225,15 @@
     transform: none;
 }
 
+.cart-drawer__warnings .cart-drawer__empty-content .continue-shopping-btn{
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.cart-drawer__warnings .cart-drawer__empty-content .continue-shopping-btn:hover{
+    background-color: var(--primary-color);
+}
+
 .cart-drawer__warnings .cart-drawer__empty-content .cart__empty-text {
     margin: 0;
 }
@@ -239,11 +248,13 @@
 .cart-drawer__warnings .cart-drawer__empty-content .cart__login-paragraph {
     margin: -1.6rem 0 0;
     line-height: 2.4rem;
+    text-transform: uppercase;
 }
 
 .cart-drawer__warnings .cart-drawer__empty-content .cart__login-paragraph a {
     font-family: var(--font-family-runddisplay-semibold);
-    color: var(--black-color);
+    color: var(--secondary-color);
+    font-weight: 700;
 }
 
 #CartDrawer-CartErrors {
@@ -328,157 +339,6 @@
     width: 35px;
     height: 24px;
 }
-/* rebuy-widget */
-.cart-drawer .cart-rebuy-product{
-    padding:  0 30px 34px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget{
-    padding: 0;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .primary-title{
-    text-align: left;
-    line-height: 32px;
-    padding-right: 75px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .splide--slide{
-    padding: 0;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .splide__arrows{
-    position: absolute;
-    right: 0;
-    top: -50px;
-    display: flex;
-    gap: 10px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .splide__arrows .splide__arrow{
-    position: static;
-    transform: none;
-    border: 1px solid #E6E6E6;
-    width: 32px;
-    height: 32px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .splide__arrows .splide__arrow::before{
-    border: solid var(--primary-color);
-    border-width: 0 1.4px 1.4px 0;
-    display: inline-block;
-    padding: 3.8px;
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    content: "";
-    transition: var(--webkit-transition-all);
-    margin-right: 4px;
-    margin-top: 1px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .splide__arrows .splide__arrow.splide__arrow--prev::before{
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-    margin-right: -4px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .splide__arrows .splide__arrow svg{
-    display: none;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block{
-    padding: 16px 21px 16px;
-    border-radius: 8px;
-    position: relative;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block::after{
-    position: absolute;
-    left: 5px;
-    top: 0;
-    z-index: -1;
-    background: var(--background-color);
-    border-radius: 8px;
-    content: "";
-    width: calc(100% - 10px);
-    height: 100%;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .rebuy-product-info{
-    text-align: left;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .rebuy-product-info a{
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-top: 12px;
-    width: 100%;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    /* white-space: nowrap; */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    height: 48px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .rebuy-product-info .rebuy-product-price{
-    font-size: 14px;
-    line-height: 22px;
-    font-weight: 500;
-    color: var(--primary-color);
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .rebuy-product-info .rebuy-product-price span{
-    color: var(--primary-color);
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-actions{ 
-    margin: 0 !important;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .rebuy-button{
-    position: absolute;
-    font-size: 0;
-    right: 11px;
-    top: 6px;
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    background-color: var(--primary-color);
-    border: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .rebuy-button::after{
-    content: "+";
-    display: inline-block;
-    vertical-align: top;
-    color: var(--white-color);
-    font-size: 23px;
-    font-weight: 300;
-    line-height: 19px;
-    margin-top: -2px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .quick-add__submit{
-    position: absolute;
-    font-size: 0;
-    right: 11px;
-    top: 6px;
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    background-color: var(--primary-color);
-    border: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 24px;
-    min-height: 24px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .quick-add__submit::after{
-    content: "+";
-    display: inline-block;
-    vertical-align: top;
-    color: var(--white-color);
-    font-size: 23px;
-    font-weight: 300;
-    line-height: 19px;
-}
-.cart-drawer .cart-rebuy-product .rebuy-widget .rebuy-product-block .rebuy-product-options,
-.cart-drawer .cart-rebuy-product .rebuy-widget .splide__pagination,
-.cart-drawer .cart-rebuy-product .rebuy-widget .powered-by-rebuy{
-    display: none;
-}
 /* responsive */
 @media screen and (max-width: 576px) {
     .cart-drawer .drawer__header{ padding: 2.0rem;}
@@ -491,7 +351,7 @@
     .cart-drawer .cart-items-table .cart-items .cart-item{padding: 1.2rem; margin: 1.0rem 0 0;}
     .cart-drawer .cart-items-table .cart-item{column-gap: 1.2rem; row-gap: 0.8rem;}
     .cart-drawer .cart-items-table .cart-item .cart-item__name{font-size: 1.4rem; line-height: 2.2rem;}
-    .cart-drawer .cart-item__totals .price{ font-size: 1.4rem; line-height: 2.2rem;}
+    .cart-drawer .cart-item__totals .price{ font-size: 1.2rem; line-height: 1.5rem;}
     .cart-drawer .cart-item__quantity quantity-popover .quantity{ min-height: 3.4rem; width: 8.5rem;}
     .cart-drawer .cart-item__quantity .quantity__input{ font-size: 1.2rem; line-height: normal;}
     .cart-drawer .cart-item__quantity .quantity__button .svg-wrapper{ width: 1.0rem; }

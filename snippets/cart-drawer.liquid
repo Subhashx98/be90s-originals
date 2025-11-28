@@ -37,7 +37,7 @@
         <div class="drawer__inner-empty">
           <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
             <div class="cart-drawer__empty-content">
-              <div class="cart__empty-text h2">{{ 'sections.cart.empty' | t }}</div>
+              <div class="cart__empty-text h2">YOUR BAG IS EMPTY!</div>
               <button
                 class="drawer__close"
                 type="button"
@@ -48,7 +48,7 @@
                   {{- 'icon-close-small.svg' | inline_asset_content -}}
                 </span>
               </button>
-              <a href="{{ routes.all_products_collection_url }}" class="button">
+              <a href="{{ routes.all_products_collection_url }}" class="primary-btn continue-shopping-btn">
                 {{ 'general.continue_shopping' | t }}
               </a>
 
@@ -64,7 +64,7 @@
       {%- endif -%}
       <div class="drawer__header">
         <div class="drawer__heading h1">
-          {{ 'sections.cart.title' | t }}
+          Your Bag
           <span class="cart-count-item">
             {%- if cart != empty -%}
               {%- if cart.item_count < 100 -%}
@@ -106,7 +106,7 @@
                 {% endif %}
               </p>
               <div class="progressbar" id="freeprogressbar">
-                <span class="progress_price">$0</span>
+                <span class="progress_price">&#x20B9;0</span>
                 <div class="progress-status">
                   {% assign progress = cart_total | times: 100 | divided_by: shipping_value %}
                   <div
@@ -116,7 +116,7 @@
                     x
                   </div>
                 </div>
-                <span class="progress_price"> ${{ shipping_value | divided_by: 100 }} </span>
+                <span class="progress_price"> &#x20B9;{{ shipping_value | divided_by: 100 }} </span>
               </div>
             </div>
           {%- endif -%}
@@ -458,11 +458,6 @@
           </div>
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
-        {%- if settings.rebuy_product -%}
-          <div class="cart-rebuy-product">
-            {{ settings.cart_drawer_liquid }}
-          </div>
-        {%- endif -%}
       </cart-drawer-items>
       <div class="drawer__footer">
         {%- if settings.show_cart_note -%}

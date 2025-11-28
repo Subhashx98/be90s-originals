@@ -281,7 +281,7 @@ cart-drawer-items.is-empty{
 
 .cart-drawer .cart-item__price-wrapper .cart-item__discounted-prices {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   gap: 0.6rem;
 }
 
