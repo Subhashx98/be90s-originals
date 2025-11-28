@@ -1,0 +1,331 @@
+{% if block.type == 'main-megamenu' %}
+  <div class="nav-menu-dropdown page-width">
+    <div class="menu-dropdown-content">
+      <!-- First Level Menu Mobile -->
+      {% if link.links != blank %}
+        <ul class="first-level-menu first-level-mobile">
+          {% for link in link.links %}
+            <li data-id="{{ link.title | handleize }}">
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <!-- First Level Menu Desktop -->
+      <div class="main-menu-block">
+        <!-- Back Arrow Mobile -->
+        <div class="mobile-back-btn">
+          <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+          Back
+        </div>
+        <!-- Desktop Main First Level Menu -->
+        {% if link.links != blank %}
+          <ul class="first-level-menu first-level-desktop">
+            {% for link in link.links %}
+              <li
+                data-id="{{ link.title | handleize }}"
+                {% if forloop.index == 4 %}
+                  class="active-item"
+                {% endif %}
+              >
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <!-- Second Level Menu -->
+        {% if link.links.size > 0 %}
+          {% for link in link.links %}
+            <div
+              id="{{ link.title | handleize }}"
+              class="second-level-menu {% if forloop.index == 4 %}active{% endif %}"
+            >
+              <!-- Mobile Title -->
+              {% for block in section.blocks %}
+                {% if block.settings.navigation_title == link.title and block.type == 'inner-megamenu' %}
+                  <div class="mobile-menu-title">
+                    <span>{{ link.title }}</span>
+                  </div>
+                {% endif %}
+              {% endfor %}
+              {% for block in section.blocks %}
+                {% if block.settings.navigation_title == link.title %}
+                  {% if block.type == 'inner-megamenu' %}
+                    {% if block.settings.menu_type == 'color-menu-with-image-block' %}
+                      <div class="second-level-main menu-with-color">
+                        <!-- Second Level First Menu -->
+                        {% if block.settings.secondary_menu != blank %}
+                          <div class="second-level-menu-link">
+                            {% if block.settings.color_menu_title != blank %}
+                              <div class="h3">{{ block.settings.color_menu_title }}</div>
+                            {% endif %}
+                            <ul class="sub-menu">
+                              {% for link in block.settings.secondary_menu.links %}
+                                <li>
+                                  <a href="{{ link.url }}">
+                                    {% if link.object.metafields.custom.color != blank %}
+                                      <span
+                                        class="link-color-bg"
+                                        style="background-color:{{ link.object.metafields.custom.color }};"
+                                      >
+                                      </span>
+                                    {% else %}
+                                      <span class="link-color-bg"></span>
+                                    {% endif %}
+                                    <span class="link-text">{{ link.title }}</span>
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        {% endif %}
+                        <!-- Second Level Middle -->
+                        {% if block.settings.image_block_image != blank %}
+                          <div class="second-level-middle">
+                            <span class="nav-img">
+                              <img
+                                src="{{ block.settings.image_block_image | image_url }}"
+                                alt="{{ block.settings.image_block_image.alt | escape | default: shop.name }}"
+                                width="282"
+                                height="266"
+                                loading="lazy"
+                              >
+                            </span>
+                          </div>
+                        {% endif %}
+                        <!-- Second Level Menu Card -->
+                        {% if block.settings.featured_image != blank and block.settings.featured_title != blank %}
+                          <div class="nav-menu-card">
+                            <div class="nav-card">
+                              <span class="nav-card-img">
+                                <img
+                                  src="{{ block.settings.featured_image | image_url }}"
+                                  alt="{{ block.settings.featured_image.alt | escape | default: shop.name }}"
+                                  width="282"
+                                  height="266"
+                                  loading="lazy"
+                                >
+                              </span>
+                              {% if block.settings.featured_top_text != blank %}
+                                <span class="card-small-text">{{ block.settings.featured_top_text }}</span>
+                              {% endif %}
+                              <div class="h3">{{ block.settings.featured_title }}</div>
+                              {% if block.settings.featured_cta_text != blank
+                                and block.settings.featured_cta_link != blank
+                              %}
+                                <a href="{{ block.settings.featured_cta_link }}" class="primary-btn white-btn">
+                                  {{- block.settings.featured_cta_text -}}
+                                </a>
+                              {% endif %}
+                            </div>
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% elsif block.settings.menu_type == 'collection-menu-with-image-block' %}
+                      <div class="menu-with-collection second-level-main">
+                        <!-- Second Level First Menu -->
+                        {% if block.settings.secondary_menu != blank %}
+                          <div class="second-level-menu-link">
+                            <ul class="sub-menu">
+                              {% for link in block.settings.secondary_menu.links %}
+                                <li>
+                                  <a href="{{ link.url }}">
+                                    <span class="menu-link-img">
+                                      {% if link.object.featured_image != blank %}
+                                        <img
+                                          src="{{ link.object.featured_image | image_url }}"
+                                          alt="{{ link.object.featured_image.alt | escape | default: shop.name }}"
+                                          width="50"
+                                          height="50"
+                                          loading="lazy"
+                                        >
+                                      {% else %}
+                                        <img
+                                          src="{{ 'placeholder-image.webp' | asset_url }}"
+                                          alt="{{ 'Placeholder Image' | escape | default: shop.name }}"
+                                          width="50"
+                                          height="50"
+                                          loading="lazy"
+                                        >
+                                      {% endif %}
+                                    </span>
+                                    {{ link.title }}
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        {% endif %}
+                        <!-- Second Level Menu Image -->
+                        {% if block.settings.image_block_image != blank %}
+                          <div class="second-level-middle">
+                            <span class="nav-img">
+                              <img
+                                src="{{ block.settings.image_block_image | image_url }}"
+                                alt="{{ block.settings.image_block_image.alt | escape | default: shop.name }}"
+                                width="282"
+                                height="266"
+                                loading="lazy"
+                              >
+                            </span>
+                          </div>
+                        {% endif %}
+                        <!-- Second Level Menu Card -->
+                        {% if block.settings.featured_image != blank and block.settings.featured_title != blank %}
+                          <div class="nav-menu-card">
+                            <div class="nav-card">
+                              <span class="nav-card-img">
+                                <img
+                                  src="{{ block.settings.featured_image | image_url }}"
+                                  alt="{{ block.settings.featured_image.alt | escape | default: shop.name }}"
+                                  width="282"
+                                  height="266"
+                                  loading="lazy"
+                                >
+                              </span>
+                              {% if block.settings.featured_top_text != blank %}
+                                <span class="card-small-text">{{ block.settings.featured_top_text }}</span>
+                              {% endif %}
+                              <div class="h3">{{ block.settings.featured_title }}</div>
+                              {% if block.settings.featured_cta_text != blank
+                                and block.settings.featured_cta_link != blank
+                              %}
+                                <a href="{{ block.settings.featured_cta_link }}" class="primary-btn white-btn">
+                                  {{- block.settings.featured_cta_text -}}
+                                </a>
+                              {% endif %}
+                            </div>
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% elsif block.settings.menu_type == 'product-menu' %}
+                      <div class="menu-with-product second-level-main">
+                        <!-- Second Level First Menu -->
+                        {% if block.settings.secondary_menu != blank %}
+                          <div class="second-level-menu-link">
+                            <ul class="sub-menu">
+                              {% for link in block.settings.secondary_menu.links %}
+                                <li
+                                  data-id="{{ link.title | handleize }}"
+                                  {% if forloop.index == 1 %}
+                                    class="active-subitem"
+                                  {% endif %}
+                                >
+                                  <a href="{{ link.url }}">
+                                    <span class="link-text">{{ link.title }}</span>
+                                  </a>
+                                  {% if link.links.size > 0 %}
+                                    <ul
+                                      id="{{ link.title | handleize }}"
+                                      class="sub-menu third-level-sub-menu third-level-mobile-menu"
+                                    >
+                                      {% for secondLevelLink in link.links %}
+                                        <li>
+                                          <a href="{{ secondLevelLink.url }}">
+                                            <span class="menu-link-img">
+                                              {% if secondLevelLink.object.featured_image != blank %}
+                                                <img
+                                                  src="{{ secondLevelLink.object.featured_image | image_url }}"
+                                                  alt="{{ secondLevelLink.object.featured_image.alt | escape | default: shop.name }}"
+                                                  width="50"
+                                                  height="50"
+                                                  loading="lazy"
+                                                >
+                                              {% else %}
+                                                <img
+                                                  src="{{ 'placeholder-image.webp' | asset_url }}"
+                                                  alt="{{ 'Placeholder Image' | escape | default: shop.name }}"
+                                                  width="50"
+                                                  height="50"
+                                                  loading="lazy"
+                                                >
+                                              {% endif %}
+                                            </span>
+                                            {{ secondLevelLink.title }}
+                                          </a>
+                                        </li>
+                                      {% endfor %}
+                                    </ul>
+                                  {% endif %}
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+
+                          <div class="second-level-middle third-level-desktop-menu">
+                            {% for link in block.settings.secondary_menu.links %}
+                              {% if link.links.size > 0 %}
+                                <ul
+                                  id="{{ link.title | handleize }}"
+                                  class="sub-menu third-level-sub-menu {% if forloop.index == 1 %}active-submenu{% endif %}"
+                                >
+                                  {% for secondLevelLink in link.links %}
+                                    <li>
+                                      <a href="{{ secondLevelLink.url }}">
+                                        <span class="menu-link-img">
+                                          {% if secondLevelLink.object.featured_image != blank %}
+                                            <img
+                                              src="{{ secondLevelLink.object.featured_image | image_url }}"
+                                              alt="{{ secondLevelLink.object.featured_image.alt | escape | default: shop.name }}"
+                                              width="50"
+                                              height="50"
+                                              loading="lazy"
+                                            >
+                                          {% else %}
+                                            <img
+                                              src="{{ 'placeholder-image.webp' | asset_url }}"
+                                              alt="{{ 'Placeholder Image' | escape | default: shop.name }}"
+                                              width="50"
+                                              height="50"
+                                              loading="lazy"
+                                            >
+                                          {% endif %}
+                                        </span>
+                                        {{ secondLevelLink.title }}
+                                      </a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        {% endif %}
+                        <!-- Second Level Menu Card -->
+                        {% if block.settings.featured_image != blank and block.settings.featured_title != blank %}
+                          <div class="nav-menu-card">
+                            <div class="nav-card">
+                              <span class="nav-card-img">
+                                <img
+                                  src="{{ block.settings.featured_image | image_url }}"
+                                  alt="{{ block.settings.featured_image.alt | escape | default: shop.name }}"
+                                  width="282"
+                                  height="266"
+                                  loading="lazy"
+                                >
+                              </span>
+                              {% if block.settings.featured_top_text != blank %}
+                                <span class="card-small-text">{{ block.settings.featured_top_text }}</span>
+                              {% endif %}
+                              <div class="h3">{{ block.settings.featured_title }}</div>
+                              {% if block.settings.featured_cta_text != blank
+                                and block.settings.featured_cta_link != blank
+                              %}
+                                <a href="{{ block.settings.featured_cta_link }}" class="primary-btn white-btn">
+                                  {{- block.settings.featured_cta_text -}}
+                                </a>
+                              {% endif %}
+                            </div>
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

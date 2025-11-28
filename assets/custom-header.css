@@ -27,8 +27,8 @@
 }
 .section-header .header__icons .header__icon .svg-wrapper,
 .section-header .header__icon--search .svg-wrapper{
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 4rem;
+    height: auto;
 }
 .section-header .header__icons .header__icon:hover,
 .section-header .header__icon--search:hover{
@@ -140,7 +140,7 @@
     background: var(--background-color);
     border-radius: 1.0rem;
     box-shadow: none !important;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--primary-color);
     font-family: var(--font-family-figtree);
     font-weight: 400;

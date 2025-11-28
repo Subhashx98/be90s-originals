@@ -16,6 +16,10 @@
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+{{ 'custom-header.css' | asset_url | stylesheet_tag }}
+{{ 'custom-menu-drawer.css' | asset_url | stylesheet_tag }}
+{{ 'header-custom-megamenu.css' | asset_url | stylesheet_tag }}
+
 <style>
   header-drawer {
     justify-self: start;
@@ -66,6 +70,10 @@
     padding-bottom: 1rem;
     padding-top: 1rem;
     line-height: calc(1 + 0.8 / var(--font-body-scale));
+  }
+  
+  .header-user-icon{
+    border-radius:50%;
   }
 
   @media screen and (min-width: 750px) {
@@ -149,7 +157,7 @@
 
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+        <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
         {%- if settings.logo != blank -%}
@@ -176,19 +184,13 @@
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
-        </h1>
+      </div>
       {%- endif -%}
     {%- endif -%}
 
-    {%- liquid
-      if section.settings.menu != blank
-        if section.settings.menu_type_desktop == 'dropdown'
-          render 'header-dropdown-menu'
-        elsif section.settings.menu_type_desktop != 'drawer'
-          render 'header-mega-menu'
-        endif
-      endif
-    %}
+    {% if section.settings.menu != blank %}
+      {%- render 'header-custom-megamenu', section: section -%}
+    {% endif %}
 
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -223,7 +225,7 @@
       {%- endif -%}
     {%- endif -%}
 
-    <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+    <div class="header__icons {% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
       <div class="desktop-localization-wrapper">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <localization-form class="small-hide medium-hide" data-prevent-hide>
@@ -247,12 +249,16 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      
+      <a href="{{ section.settings.spa_locator_page }}" class="spa-locator">
+        <span class="svg-wrapper">{{ 'icon-location-1.svg' | inline_asset_content }}</span>
+        <span class="locator-text">{{ section.settings.spa_locator_text }}</span>
+      </a>
 
       {%- if shop.customer_accounts_enabled -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-          class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
+          class="header__icon header__icon--account link focus-inset"
           rel="nofollow"
         >
           {%- if section.settings.enable_customer_avatar -%}
@@ -260,18 +266,20 @@
               {%- if customer and customer.has_avatar? -%}
                 {{ customer | avatar }}
               {%- else -%}
-                <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+                {% comment %} <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span> {% endcomment %}
+                 <img src="{{ 'user-icon.png' | asset_url }}" width="100%" height="100%" alt="User Icon" class="header-user-icon">
               {%- endif -%}
+              <span class="visually-hidden">Account</span>
             </account-icon>
           {%- else -%}
-            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+            <span class="visually-hidden">Account</span>
+            {% comment %} <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span> {% endcomment %}
+             <img src="{{ 'user-icon.png' | asset_url }}" width="100%" height="100%" alt="User Icon" class="header-user-icon">
           {%- endif -%}
-          <span class="visually-hidden">
+          <span class="customer-name">
             {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
+              if customer and customer.first_name != blank
+                echo customer.first_name
               endif
             -%}
           </span>
@@ -287,7 +295,7 @@
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {% if cart == empty %}
-          <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+          <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
         {% else %}
           <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
         {% endif %}
@@ -296,11 +304,71 @@
           <div class="cart-count-bubble">
             {%- if cart.item_count < 100 -%}
               <span aria-hidden="true">{{ cart.item_count }}</span>
+            {%- else -%}
+              <span aria-hidden="true">99+</span>
             {%- endif -%}
             <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
           </div>
         {%- endif -%}
       </a>
+    </div>
+
+    <!-- Header Mobile Search -->
+    <div class="header__search mobile-search">
+      {%- if settings.predictive_search_enabled -%}
+        <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+      {%- else -%}
+        <search-form class="search-modal__form">
+      {%- endif -%}
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+        <div class="field">
+          <span class="icon-search-wrapper">
+            {{- 'icon-search.svg' | inline_asset_content -}}
+          </span>
+          <input
+            class="search__input field__input"
+            id="seach-header"
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="{{ 'general.search.search' | t }}"
+            {%- if settings.predictive_search_enabled -%}
+              role="combobox"
+              aria-expanded="false"
+              aria-owns="predictive-search-results"
+              aria-controls="predictive-search-results"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            {%- endif -%}
+          >
+          <label class="field__label" for="seach-header">{{ 'general.search.search' | t }}</label>
+          <input type="hidden" name="options[prefix]" value="last">
+          <button
+            type="reset"
+            class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
+            aria-label="{{ 'general.search.reset' | t }}"
+          >
+            <span class="svg-wrapper">
+              {{- 'icon-reset.svg' | inline_asset_content -}}
+            </span>
+          </button>
+        </div>
+
+        {%- if settings.predictive_search_enabled -%}
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search></div>
+
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+        {%- endif -%}
+      </form>
+      {%- if settings.predictive_search_enabled -%}
+        </predictive-search>
+      {%- else -%}
+        </search-form>
+      {%- endif -%}
     </div>
   </header>
 </{{ header_tag }}>
@@ -431,9 +499,11 @@
     "@context": "http://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
+    "image": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
+   "description":"{{ shop.description }}",
     "sameAs": [
       {{ settings.social_twitter_link | json }},
       {{ settings.social_facebook_link | json }},
@@ -445,7 +515,17 @@
       {{ settings.social_youtube_link | json }},
       {{ settings.social_vimeo_link | json }}
     ],
-    "url": {{ request.origin | append: page.url | json }}
+    "url": {{ request.origin | append: page.url | json }},
+    "email": "{{ shop.email }}",
+    "telephone": "{{ shop.phone }}",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ shop.address.address1 }}",
+        "addressLocality": "{{ shop.address.city }}",
+        "addressCountry": "{{ shop.address.country_code }}",
+        "addressRegion": "{{ shop.address.province }}",
+        "postalCode": "{{ shop.address.zip }}"
+    }
   }
 </script>
 
@@ -466,11 +546,34 @@
   </script>
 {%- endif -%}
 
+{% if template contains 'collection' and collection %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "{{ collection.title | escape }}",
+    "description": "{{ collection.description | strip_html | escape }}",
+    "url": "{{ shop.url }}{{ collection.url }}",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {% for product in collection.products %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "url": "{{ shop.url }}{{ product.url }}"
+        }{% if forloop.last == false %},{% endif %}
+        {% endfor %}
+      ]
+    }
+  }
+  </script>
+{% endif %}
+
 {% schema %}
 {
   "name": "t:sections.header.name",
   "class": "section-header",
-  "max_blocks": 3,
   "settings": [
     {
       "type": "select",
@@ -570,6 +673,17 @@
       "label": "t:sections.header.settings.show_line_separator.label"
     },
     {
+      "type": "url",
+      "id": "spa_locator_page",
+      "label": "Select Spa Locator Page"
+    },
+    {
+      "type": "text",
+      "id": "spa_locator_text",
+      "label": "Text",
+      "default": "Store Locator"
+    },
+    {
       "type": "header",
       "content": "t:sections.header.settings.header__1.content"
     },
@@ -652,6 +766,114 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "main-megamenu",
+      "name": "Main Megamenu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "navigation_title",
+          "label": "Navigation title(Required)",
+          "default": "Navigation title"
+        },
+        {
+          "type": "checkbox",
+          "id": "enabled_mega_menu",
+          "label": "Enable Megamenu",
+          "default": true,
+          "info": "If enabled, the Megamenu nav will be shown on hover"
+        }
+      ]
+    },
+    {
+      "type": "inner-megamenu",
+      "name": "Inner Megamenu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "navigation_title",
+          "label": "Navigation title(Required)",
+          "default": "Navigation title"
+        },
+        {
+          "type": "select",
+          "id": "menu_type",
+          "label": "Select Menu Type",
+          "default": "color-menu-with-image-block",
+          "options": [
+            {
+              "value": "color-menu-with-image-block",
+              "label": "Color Menu with Image Block"
+            },
+            {
+              "value": "collection-menu-with-image-block",
+              "label": "Collection Menu with Image Block"
+            },
+            {
+              "value": "product-menu",
+              "label": "Product Menu"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Selected Menu Type Settings"
+        },
+        {
+          "type": "text",
+          "id": "color_menu_title",
+          "label": "Title",
+          "default": "Shop By Color",
+          "visible_if": "{{ block.settings.menu_type == 'color-menu-with-image-block' }}"
+        },
+        {
+          "type": "link_list",
+          "id": "secondary_menu",
+          "label": "Secondary Menu",
+          "info": "Menu designed will be varies based on the selected menu type"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_block_image",
+          "label": "Image Block Image",
+          "info": "Image to display in the image block (Recommended size: 450 x 450)",
+          "visible_if": "{{ block.settings.menu_type == 'color-menu-with-image-block' or block.settings.menu_type == 'collection-menu-with-image-block' }}"
+        },
+        {
+          "type": "header",
+          "content": "Featured Block Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_image",
+          "label": "Image",
+          "info": "Recommended size: 450 x 450"
+        },
+        {
+          "type": "text",
+          "id": "featured_top_text",
+          "label": "Top Text",
+          "default": "Featured Text"
+        },
+        {
+          "type": "text",
+          "id": "featured_title",
+          "label": "Title",
+          "default": "Featured Title"
+        },
+        {
+          "type": "text",
+          "id": "featured_cta_text",
+          "label": "CTA Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "featured_cta_link",
+          "label": "CTA Link"
+        }
+      ]
     }
   ]
 }

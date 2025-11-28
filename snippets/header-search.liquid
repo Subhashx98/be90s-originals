@@ -42,6 +42,9 @@
         {%- endif -%}
         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
           <div class="field">
+            <span class="icon-search-wrapper">
+              {{- 'icon-search.svg' | inline_asset_content -}}
+            </span>
             <input
               class="search__input field__input"
               id="{{ input_id }}"
@@ -71,11 +74,6 @@
             >
               <span class="svg-wrapper">
                 {{- 'icon-reset.svg' | inline_asset_content -}}
-              </span>
-            </button>
-            <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-              <span class="svg-wrapper">
-                {{- 'icon-search.svg' | inline_asset_content -}}
               </span>
             </button>
           </div>
