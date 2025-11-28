@@ -12,6 +12,13 @@
     "section_home_banner_9KDWpD": {
       "type": "section-home-banner",
       "blocks": {
+        "marquee_slider_d7GBkL": {
+          "type": "marquee_slider",
+          "settings": {
+            "icon": "shopify://shop_images/soft-cotton-fiber-icon-minimal-line-style-folded-cloth-shape-716e41-highlight-accents.png",
+            "title": "Premium Cotton Fabric"
+          }
+        },
         "banner_block_iz6Wmc": {
           "type": "banner_block",
           "settings": {
@@ -63,6 +70,7 @@
         }
       },
       "block_order": [
+        "marquee_slider_d7GBkL",
         "banner_block_iz6Wmc",
         "banner_block_QPaVzM",
         "banner_block_KRiKrf"
