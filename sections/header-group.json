@@ -53,6 +53,34 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "main_megamenu_x8mW3V": {
+          "type": "main-megamenu",
+          "settings": {
+            "navigation_title": "shop",
+            "enabled_mega_menu": true
+          }
+        },
+        "inner_megamenu_FbDkmx": {
+          "type": "inner-megamenu",
+          "settings": {
+            "navigation_title": "Mens",
+            "menu_type": "color-menu-with-image-block",
+            "color_menu_title": "Shop By Color",
+            "secondary_menu": "shop-shop-by-color-save",
+            "image_block_image": "shopify://shop_images/men-regular-fit-t-shirt-men-oversized-tshirt-men-drop-solder-tshirt-and-men-hoodie-hanging-front-view-photo.png",
+            "featured_image": "shopify://shop_images/hero-banner-desktop-1.png",
+            "featured_top_text": "Featured Text",
+            "featured_title": "Featured Title",
+            "featured_cta_text": "Shop Now",
+            "featured_cta_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "main_megamenu_x8mW3V",
+        "inner_megamenu_FbDkmx"
+      ],
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
