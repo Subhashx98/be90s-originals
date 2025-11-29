@@ -2,7 +2,7 @@
     border-bottom: 1px solid var(--grey-color);
     background: var(--background-color);
     position: relative;
-    padding: 2.0rem 0 4.0rem;
+    padding: 10rem 0 4.0rem;
 }
 .facets-vertical .facets-wrapper .facets-container{
     border-radius: 1.0rem;
@@ -235,10 +235,13 @@
     width: 100%;
 }
 .mobile-facets__wrapper .mobile-facets__disclosure .mobile-facets__open-wrapper{
-    width: 100%;
+    width: 50%;
     background: var(--white-color);
     border: 0.1rem solid var(--grey-color);
-    border-radius: 0.8rem;
+    border-radius: 8px 0 0 8px;
+    padding: 20px 12px;
+    margin-top: -64px;
+    min-height: 64px;
 }
 .mobile-facets__wrapper .mobile-facets__disclosure .mobile-facets__open .svg-wrapper{
     display: none;
@@ -250,7 +253,11 @@
     margin: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    letter-spacing: 0;
     width: 100%;
+    line-height: normal;
 }
 .mobile-facets__wrapper .mobile-facets__disclosure .mobile-facets__open-label small{
     width: 50%;
@@ -575,4 +582,16 @@
     .facets-vertical .facets-wrapper .active-facets{padding: 0; margin: 0; border: 0;}
     .main-collection-section .product-grid-container{ padding: 3.0rem 0 0;}
     .product-count{ display: none; }
+    .facets-vertical-sort .facets-vertical-form{ width: 50%; }
+    .facets-vertical-sort .facet-filters{ width: 100%;}
+    .facets-vertical-sort .facet-filters .facet-filters__field{justify-content: center; border-radius: 0 8px 8px 0; padding: 20px 12px; min-height: 64px;}
+    .facets-vertical-sort .facet-filters__field select,
+    .facets-vertical-sort .facet-filters__field .facet-filters__label{font-size: 18px;line-height: normal; font-weight: 400;}
+}
+@media only screen and (max-width: 750px) {
+    .facets-vertical-sort .facet-filters__field select,
+    .facets-vertical-sort .facet-filters__field .facet-filters__label{ font-size: 14px;}
+    .mobile-facets__wrapper .mobile-facets__disclosure .mobile-facets__open-label{ font-size: 14px;}
+    .facets-vertical-sort .facet-filters__field select{padding-right: 18px;}
+    .facets-vertical-sort .facet-filters__field .facet-filters__label{min-width: 50px;}
 }
