@@ -89,7 +89,14 @@
   {% comment %} <div class="header__icons iwMobLink">
     {% render 'wishlist-app-links', linkType: 'wishlist-page-link' %}
   </div> {% endcomment %}
-  <a href="{{ section.settings.spa_locator_page }}" class="spa-locator spa-locator-mobile">
-    <span class="svg-wrapper">{{ 'icon-location-1.svg' | inline_asset_content }}</span>
-  </a>
+  {%- if shop.customer_accounts_enabled -%}
+    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="spa-locator spa-locator-mobile">
+      {%- if customer.first_name -%}
+        <span class="header-user-text">{{ customer.first_name }}</span>
+        {%- else -%}
+          {% comment %} <span class="header-user-text">ACCOUNT</span> {% endcomment %}
+          <img src="{{ 'user-icon.png' | asset_url }}" width="30px" height="100%" alt="User Icon" class="header-user-icon">
+      {%- endif -%}
+    </a>
+  {%- endif -%}
 </header-drawer>

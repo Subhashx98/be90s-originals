@@ -249,40 +249,14 @@
           </localization-form>
         {%- endif -%}
       </div>
-      
-      <a href="{{ section.settings.spa_locator_page }}" class="spa-locator">
-        <span class="svg-wrapper">{{ 'icon-location-1.svg' | inline_asset_content }}</span>
-        <span class="locator-text">{{ section.settings.spa_locator_text }}</span>
-      </a>
 
       {%- if shop.customer_accounts_enabled -%}
-        <a
-          href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-          class="header__icon header__icon--account link focus-inset"
-          rel="nofollow"
-        >
-          {%- if section.settings.enable_customer_avatar -%}
-            <account-icon>
-              {%- if customer and customer.has_avatar? -%}
-                {{ customer | avatar }}
-              {%- else -%}
-                {% comment %} <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span> {% endcomment %}
-                 <img src="{{ 'user-icon.png' | asset_url }}" width="100%" height="100%" alt="User Icon" class="header-user-icon">
-              {%- endif -%}
-              <span class="visually-hidden">Account</span>
-            </account-icon>
-          {%- else -%}
-            <span class="visually-hidden">Account</span>
-            {% comment %} <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span> {% endcomment %}
-             <img src="{{ 'user-icon.png' | asset_url }}" width="100%" height="100%" alt="User Icon" class="header-user-icon">
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="spa-locator">
+          {%- if customer.first_name -%}
+            <span class="header-user-text"></span>{{ customer.first_name }}</span>
+            {%- else -%}
+              <span class="header-user-text">ACCOUNT</span>
           {%- endif -%}
-          <span class="customer-name">
-            {%- liquid
-              if customer and customer.first_name != blank
-                echo customer.first_name
-              endif
-            -%}
-          </span>
         </a>
       {%- endif -%}
 
