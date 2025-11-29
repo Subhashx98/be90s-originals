@@ -1,6 +1,7 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'custom-card.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -22,13 +23,10 @@
   <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+{{ 'custom-filter.css' | asset_url | stylesheet_tag }}
 
-  @media screen and (min-width: 750px) {
+{%- style -%}
+  @media screen and (min-width: 992px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -36,11 +34,11 @@
   }
 {%- endstyle -%}
 
-<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+<div class="main-collection-section section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
-      <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
+      <facet-filters-form class="facets facets-vertical-sort page-width small-hide medium-hide">
         <form class="facets-vertical-form" id="FacetSortForm">
           <div class="facet-filters sorting caption">
             <div class="facet-filters__field">
@@ -73,7 +71,7 @@
             </div>
           </div>
 
-          <div class="product-count-vertical light" role="status">
+          <div class="product-count-vertical" role="status">
             <h2 class="product-count__text text-body">
               <span id="ProductCountDesktop">
                 {%- if collection.results_count -%}
@@ -153,31 +151,107 @@
               "
             >
               {% assign skip_card_product_styles = false %}
+
+              <!-- For First Page Product Count -->
+              {% assign product_count = 0 %}
+
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
-                <li
-                  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  {% if settings.animations_reveal_on_scroll %}
-                    data-cascade
-                    style="--animation-order: {{ forloop.index }};"
+
+                {% if paginate.current_page == 1
+                  and section.settings.gift_card_image != blank
+                  and section.settings.gift_card_title != blank
+                %}
+                  {% assign product_count = product_count | plus: 1 %}
+                  <!-- Gift Card Start -->
+                  {% if product_count == 9 %}
+                    {% if section.settings.gift_card_image != blank
+                      or section.settings.gift_card_title != blank
+                      or section.settings.gift_card_button_text != blank
+                      and section.settings.gift_card_button_link != blank
+                    %}
+                      <style>
+                        .collection_grid__item {
+                          background-image: url('{{ section.settings.gift_card_image | image_url: width: 345, height: 530 }}');
+                          background-size: cover;
+                          background-position: center;
+                          background-repeat: repeat;
+                        }
+                      </style>
+                      <li
+                        class="collection_grid__item grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                        {% if settings.animations_reveal_on_scroll %}
+                          data-cascade
+                          style="--animation-order: {{ forloop.index }};"
+                        {% endif %}
+                      >
+                        <div class="collection-gift-card">
+                          {% if section.settings.gift_card_title != blank %}
+                            {{ section.settings.gift_card_title }}
+                          {% endif %}
+
+                          {% if section.settings.gift_card_button_text
+                            and section.settings.gift_card_button_link != blank
+                          %}
+                            <a class="primary-btn white-btn" href="{{ section.settings.gift_card_button_link }}">
+                              {{- section.settings.gift_card_button_text -}}
+                            </a>
+                          {% endif %}
+                        </div>
+                      </li>
+                    {% endif %}
                   {% endif %}
-                >
-                  {% render 'card-product',
-                    card_product: product,
-                    media_aspect_ratio: section.settings.image_ratio,
-                    image_shape: section.settings.image_shape,
-                    show_secondary_image: section.settings.show_secondary_image,
-                    show_vendor: section.settings.show_vendor,
-                    show_rating: section.settings.show_rating,
-                    lazy_load: lazy_load,
-                    skip_styles: skip_card_product_styles,
-                    quick_add: section.settings.quick_add,
-                    section_id: section.id
-                  %}
-                </li>
+                  <!-- Gift Card End -->
+
+                  {% if product_count <= 11 %}
+                    <li
+                      class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      {% if settings.animations_reveal_on_scroll %}
+                        data-cascade
+                        style="--animation-order: {{ forloop.index }};"
+                      {% endif %}
+                    >
+                      {% render 'card-product',
+                        card_product: product,
+                        media_aspect_ratio: section.settings.image_ratio,
+                        image_shape: section.settings.image_shape,
+                        show_secondary_image: section.settings.show_secondary_image,
+                        show_vendor: section.settings.show_vendor,
+                        show_rating: section.settings.show_rating,
+                        lazy_load: lazy_load,
+                        skip_styles: skip_card_product_styles,
+                        quick_add: section.settings.quick_add,
+                        section_id: section.id
+                      %}
+                    </li>
+                  {% endif %}
+
+                {% else %}
+                  <li
+                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {% render 'card-product',
+                      card_product: product,
+                      media_aspect_ratio: section.settings.image_ratio,
+                      image_shape: section.settings.image_shape,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      show_vendor: section.settings.show_vendor,
+                      show_rating: section.settings.show_rating,
+                      lazy_load: lazy_load,
+                      skip_styles: skip_card_product_styles,
+                      quick_add: section.settings.quick_add,
+                      section_id: section.id
+                    %}
+                  </li>
+                {% endif %}
+
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
             </ul>
@@ -200,6 +274,32 @@
   "name": "t:sections.main-collection-product-grid.name",
   "class": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Gift Card"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_card_image",
+      "info": "Recommend Image Size: 357 X 467.",
+      "label": "Gift Card Image"
+    },
+    {
+      "type": "richtext",
+      "id": "gift_card_title",
+      "label": "Gift Card Title",
+      "info": "This is the title of the featured card."
+    },
+    {
+      "type": "text",
+      "id": "gift_card_button_text",
+      "label": "Gift Card Button Text"
+    },
+    {
+      "type": "url",
+      "id": "gift_card_button_link",
+      "label": "Gift Card Button URL"
+    },
     {
       "type": "range",
       "id": "products_per_page",
@@ -233,7 +333,7 @@
           "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__2.label"
         }
       ]
-    },    
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
@@ -337,10 +437,6 @@
         {
           "value": "standard",
           "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
-        },
-        {
-          "value": "bulk",
-          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_3"
         }
       ]
     },

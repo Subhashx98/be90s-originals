@@ -12,6 +12,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  row-gap: 0.6rem;
 }
 
 .pagination__list > li {
@@ -20,11 +21,19 @@
 }
 
 .pagination__list > li:not(:last-child) {
-  margin-right: 1rem;
+  margin-right: 0.8rem;
+}
+
+.pagination__list > li.pagination-item-next:first-child{
+  margin-right: 2.0rem;
+}
+.pagination__list > li:last-child{
+  margin-left: 1.4rem;
 }
 
 .pagination__item {
-  color: rgb(var(--color-foreground));
+  background: var(--white-color);
+  border: 0.1rem solid var(--grey-color);
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -33,30 +42,22 @@
   width: 100%;
   padding: 0;
   text-decoration: none;
+  font-size: 1.6rem;
+  color: rgba(17, 17, 17, 0.6);
+  border-radius: 1.0rem;
+  font-weight: 400;
 }
 
-a.pagination__item:hover::after {
-  height: 0.1rem;
+.pagination__item.pagination__item--current{
+  background: var(--secondary-color);
+  border-color:  var(--secondary-color);;
+  color: var(--white-color);
+  font-weight: 500;
+  opacity: 1;
 }
 
 .pagination__item .icon-caret {
-  height: 0.6rem;
-}
-
-.pagination__item--current::after {
-  height: 0.1rem;
-}
-
-.pagination__item--current::after,
-.pagination__item:hover::after {
-  content: '';
-  display: block;
-  width: 2rem;
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: currentColor;
+  height: 0.8rem;
 }
 
 .pagination__item--next .icon {
@@ -79,4 +80,14 @@ a.pagination__item:hover::after {
 
 .pagination__item-arrow:hover::after {
   display: none;
+}
+@media only screen and (max-width: 989px) { 
+  .pagination-wrapper .pagination{display: flex; justify-content: center;}
+  .pagination__list {position: relative; gap: 0.6rem; width: 100%;}
+  .pagination__list > li:not(:last-child) { margin: 0; }
+  .pagination__list>li.pagination-item-prev:last-child,
+  .pagination__list>li.pagination-item-next:first-child{ margin: 0rem; min-width: 4.4rem;}
+}
+@media only screen and (max-width: 749px) {
+  .pagination__list {padding: 0 4.8rem;} 
 }

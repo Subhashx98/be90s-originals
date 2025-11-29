@@ -18,7 +18,7 @@
     <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
       <ul class="pagination__list list-unstyled" role="list">
         {%- if paginate.previous -%}
-          <li>
+          <li class="pagination-item-next">
             <a
               href="{{ paginate.previous.url }}{{ anchor }}"
               class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce"
@@ -27,6 +27,7 @@
               <span class="svg-wrapper">
                 {{- 'icon-caret.svg' | inline_asset_content -}}
               </span>
+              <span class="visually-hidden">{{ 'general.pagination.previous' | t }}</span>
             </a>
           </li>
         {%- endif -%}
@@ -60,7 +61,7 @@
         {%- endfor -%}
 
         {%- if paginate.next -%}
-          <li>
+          <li class="pagination-item-prev">
             <a
               href="{{ paginate.next.url }}{{ anchor }}"
               class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce"
@@ -69,6 +70,7 @@
               <span class="svg-wrapper">
                 {{- 'icon-caret.svg' | inline_asset_content -}}
               </span>
+              <span class="visually-hidden">{{ 'general.pagination.next' | t }}</span>
             </a>
           </li>
         {%- endif -%}

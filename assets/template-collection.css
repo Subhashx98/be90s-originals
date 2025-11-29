@@ -48,9 +48,9 @@
   }
 }
 
-.collection.loading .loading-overlay {
+/* .collection.loading .loading-overlay {
   display: block;
-}
+} */
 
 .collection--empty .title-wrapper {
   margin-top: 10rem;
