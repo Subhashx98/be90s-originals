@@ -65,7 +65,9 @@
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div class="product-tag-reviews">
-        {% if card_product.compare_at_price > card_product.price %}
+        {% if card_product.available == false %}
+          <span class="bestseller_tag">Sold Out</span>
+        {% elsif card_product.compare_at_price > card_product.price %}
           {% assign compare = card_product.compare_at_price %}
           {% assign price = card_product.price %}
           {% assign discount = compare | minus: price %}
