@@ -30,7 +30,7 @@
 
 <div class="facets-container{% if filter_type == 'drawer' %} facets-container-drawer{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
   {%- if filter_type == 'vertical' or filter_type == 'horizontal' -%}
-    <facet-filters-form class="facets small-hide">
+    <facet-filters-form class="facets small-hide medium-hide">
       <form
         id="FacetFiltersForm"
         class="{% if filter_type == 'horizontal' %}facets__form{% else %}facets__form-vertical{% endif %}"
@@ -127,7 +127,7 @@
                 {% when 'boolean', 'list' %}
                   <details
                     id="Details-{{ filter.param_name | escape }}-{{ section.id }}"
-                    class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
+                    class="{{ filter.label | downcase }}{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
                     data-index="{{ forloop.index }}"
                     {% if filter_type == 'vertical' and forloop.index == 1 %}
                       open
@@ -151,7 +151,10 @@
                             {{ 'products.facets.filter_and_operator_subtitle' | t }}
                           </span>
                         {%- endif -%}
-                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                        <div class="svg-wrapper">
+                          {{- 'icon-plus.svg' | inline_asset_content -}}
+                          {{- 'icon-minus.svg' | inline_asset_content -}}
+                        </div>
                       </div>
                     </summary>
                     <div
@@ -192,6 +195,7 @@
                           class="{{ visual_layout_class }}{% if filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} list-unstyled"
                           role="list"
                         >
+                          {%- assign swatchColors = settings.swatchColors | newline_to_br | split: '<br />' -%}
                           {%- for value in sorted_values -%}
                             {% liquid
                               assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
@@ -220,6 +224,18 @@
                             {%- endcapture -%}
 
                             <li class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
+                              {%- liquid
+                                for colorData in swatchColors
+                                  assign colorDataArr = colorData | split: ':'
+                                  assign ruleName = colorDataArr[0] | strip
+                                  if value.value == ruleName
+                                    assign colorCodes = colorDataArr[1]
+                                    break
+                                  else 
+                                    assign colorCodes = value.value
+                                  endif
+                                endfor
+                              -%}
                               {%- if presentation == 'swatch' -%}
                                 <div class="{{ label_class }}">
                                   <div class="swatch-input-wrapper">
@@ -249,6 +265,9 @@
                                     {% endif %}
                                     {% if is_disabled %}
                                       disabled
+                                    {% endif %}
+                                    {% if filter.label == 'Color' %}
+                                      style="background-color: {{ colorCodes }};"
                                     {% endif %}
                                   >
 
@@ -440,25 +459,25 @@
   {%- endif -%}
   {% comment %}  Drawer and mobile filter {% endcomment %}
   <menu-drawer
-    class="mobile-facets__wrapper{% if filter_type == 'horizontal' or filter_type == 'vertical' %} medium-hide large-up-hide{% endif %}"
+    class="mobile-facets__wrapper{% if filter_type == 'horizontal' or filter_type == 'vertical' %} large-up-hide{% endif %}"
     data-breakpoint="mobile"
   >
     <details class="mobile-facets__disclosure disclosure-has-popup">
       <summary class="mobile-facets__open-wrapper focus-offset">
-        <span class="mobile-facets__open{% if filter_type == 'drawer' and enable_filtering == false %} medium-hide large-up-hide{% endif %}">
+        <span class="mobile-facets__open{% if filter_type == 'drawer' and enable_filtering == false %} large-up-hide{% endif %}">
           <span class="svg-wrapper">
             {{- 'icon-filter.svg' | inline_asset_content -}}
           </span>
-          <span class="mobile-facets__open-label button-label medium-hide large-up-hide">
+          <span class="mobile-facets__open-label button-label large-up-hide">
             {%- if enable_filtering and enable_sorting -%}
-              {{ 'products.facets.filter_and_sort' | t }}
+             {{ 'products.facets.filter_and_sort' | t }} 
             {%- elsif enable_filtering -%}
-              {{ 'products.facets.filter_button' | t }}
+              <small>{{ 'products.facets.filter_button' | t }}</small>
             {%- elsif enable_sorting -%}
-              {{ 'products.facets.sort_button' | t }}
+              <small>{{ 'products.facets.sort_button' | t }}</small>
             {%- endif -%}
           </span>
-          <span class="mobile-facets__open-label button-label small-hide">
+          <span class="mobile-facets__open-label button-label medium-hide small-hide">
             {%- if enable_filtering -%}
               {{ 'products.facets.filter_button' | t }}
             {%- endif -%}
@@ -522,14 +541,14 @@
                     {% when 'boolean', 'list' %}
                       <details
                         id="Details-Mobile-{{ filter.param_name | escape }}-{{ section.id }}"
-                        class="mobile-facets__details js-filter"
+                        class="mobile-facets__details js-filter {{ filter.label | downcase }}"
                         data-index="mobile-{{ forloop.index }}"
                       >
                         <summary class="mobile-facets__summary focus-inset">
                           <div>
                             <span>{{ filter.label | escape }}</span>
                             <span class="mobile-facets__arrow">
-                              {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              {{- 'icon-caret.svg' | inline_asset_content -}}
                             </span>
                           </div>
                         </summary>
@@ -551,6 +570,7 @@
                             {%- endif -%}
                           </button>
                           <ul class="{{ visual_layout_class }} mobile-facets__list list-unstyled" role="list">
+                            {%- assign swatchColors = settings.swatchColors | newline_to_br | split: '<br />' -%}
                             {%- liquid
                               assign sorted_values = filter.values
                               # Keep the selected values grouped together when operator is AND
@@ -589,6 +609,18 @@
                               {%- endcapture -%}
 
                               <li class="mobile-facets__item list-menu__item">
+                              {%- liquid
+                                for colorData in swatchColors
+                                  assign colorDataArr = colorData | split: ':'
+                                  assign ruleName = colorDataArr[0] | strip
+                                  if value.value == ruleName
+                                    assign colorCodes = colorDataArr[1]
+                                    break
+                                  else 
+                                    assign colorCodes = value.value
+                                  endif
+                                endfor
+                              -%}
                                 {% if presentation == 'swatch' %}
                                   <div class="{{ label_class }}">
                                     <div class="swatch-input-wrapper">
@@ -619,6 +651,9 @@
                                       {% endif %}
                                       {% if is_disabled %}
                                         disabled
+                                      {% endif %}
+                                      {% if filter.label == 'Color' %}
+                                        style="background-color: {{ colorCodes }};"
                                       {% endif %}
                                     >
 
