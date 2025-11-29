@@ -72,9 +72,9 @@
       "settings": {
         "also_buy_products_id_desktop": "",
         "also_buy_products_id_mobile": "",
-        "enable_sticky_info": true,
+        "enable_sticky_info": false,
         "color_scheme": "scheme-1",
-        "media_size": "large",
+        "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "contain",
         "gallery_layout": "thumbnail_slider",
@@ -82,9 +82,9 @@
         "media_position": "left",
         "image_zoom": "lightbox",
         "hide_variants": true,
-        "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 12
+        "enable_video_looping": true,
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "related-products": {
