@@ -66,6 +66,7 @@
 }
 .facets-vertical .facets-wrapper .active-facets facet-remove .active-facets__button span.button:hover{
     background: var(--secondary-color);
+    color: var(--white-color);
 }
 /* Facts Details */
 .facets-vertical .facets-wrapper .facets__disclosure-vertical{
