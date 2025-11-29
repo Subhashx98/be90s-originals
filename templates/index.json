@@ -155,7 +155,7 @@
       "name": "Best Seller",
       "settings": {
         "title": "Women’s Top Wear",
-        "collection": "women",
+        "collection": "womens",
         "products_to_show": 25,
         "tablet_cards": "2",
         "mobile_cards": "2",
