@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "collection_list_banner_krqczB": {
+      "type": "collection-list-banner",
+      "name": "Collection List Banner",
+      "settings": {
+        "banner_image": "shopify://shop_images/not-like-this-show-full-tshirt-front-and-with-henked-is-single-frame.png",
+        "heading": "Our Collection"
+      }
+    },
     "main": {
       "type": "main-list-collections",
       "settings": {
@@ -22,6 +30,7 @@
     }
   },
   "order": [
+    "collection_list_banner_krqczB",
     "main"
   ]
 }
