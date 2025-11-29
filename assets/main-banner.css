@@ -1,0 +1,88 @@
+.main-banner{
+    position: relative;
+    z-index: 1;
+    padding: 90px 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin-top: -20px;
+}
+.main-banner .page-width{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 30px;
+}
+.main-banner>*{
+    color: var(--white-color);
+}
+.main-banner::after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    content: "";
+    z-index: -1;
+}
+.main-banner::before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 30%;
+    background: #000000;
+    content: "";
+    z-index: -1;
+    filter: blur(40px);
+    -webkit-filter: blur(40px);
+    opacity: 0.5;
+    border-radius: 0% 40% 40% 00%;
+    box-shadow: 0px 0px 0.15rem 0.15rem #000000;
+}
+.main-banner h1{
+    color: var(--white-color);
+    line-height: 60px;
+}
+.main-banner p:first-of-type{
+    margin-top: 0;
+}
+.main-banner p{
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+    margin:5px 0 0;
+}
+.main-banner .breadcrumbs{
+    padding: 0;
+}
+.main-banner .breadcrumbs ul li a,
+.breadcrumbs ul li{
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 500;
+    color: var(--white-color);
+}
+.main-banner .breadcrumbs ul li a,
+.main-banner .breadcrumbs ul li:before{
+    color: var(--white-color);
+}
+.main-banner .breadcrumbs ul li:before{
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 100;
+}
+/* Responsive */
+@media screen and (max-width: 991px) {
+    .main-banner{padding: 40px 0; text-align: center;}
+    .main-banner .page-width{gap: 20px;}
+    .main-banner::after{background: rgba(0, 0, 0, 0.8);}
+    .main-banner h1{ font-size: 40px; line-height: normal;}
+    .main-banner p{ font-size: 16px; font-weight: 400; line-height: 24px;}
+    .main-banner .breadcrumbs{padding:  0 0;}
+    .main-banner .breadcrumbs ul{justify-content: center;}
+    .main-banner .breadcrumbs ul li a{font-size: 16px; line-height: 24px;}
+    .main-banner .breadcrumbs ul li:before{line-height: 24px;}
+}
