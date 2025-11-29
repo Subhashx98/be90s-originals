@@ -105,10 +105,6 @@
   max-height: 408px;
 }
 
-.quick-add-hidden {
-  display: none;
-}
-
 .quick-add-modal__content-info .product-media-container .product__modal-opener:not(.product__modal-opener--image) {
   display: block;
 }

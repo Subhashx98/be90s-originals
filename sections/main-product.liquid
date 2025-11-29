@@ -22,8 +22,6 @@
   {{ 'section-breadcrumbs.css' | asset_url | stylesheet_tag }}
   {{ 'custom-card.css' | asset_url | stylesheet_tag }}
   {{ 'custom-gift-card.css' | asset_url | stylesheet_tag }}
-  {{ 'frequently-bought-rebuy.css' | asset_url | stylesheet_tag }}
-  {{ 'also-buy-product-rebuy.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -83,7 +81,7 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <!-- Product Breadcrumbs -->
-  <div class="quick-add-hidden {% if product.type == 'Gift Card' %}breadcrumbs-gift-card{% endif %}">
+  <div class="main-product-bredcrumps{% if product.type == 'Gift Card' %}breadcrumbs-gift-card{% endif %}">
     <div class="page-width">
       {% render 'breadcrumbs' %}
     </div>
@@ -92,28 +90,6 @@
     <div class="product {% if product.type == 'Gift Card' %}product-gift-card{% endif %} product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-desktop{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper product_left_wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
-        <div class="product-left-reviews desktop-product-reviews quick-add-hidden">
-          <script type="text/javascript">
-            (function e() {
-              var e = document.createElement('script');
-              (e.type = 'text/javascript'),
-                (e.async = true),
-                (e.src = '//staticw2.yotpo.com/FeesC17n5L5MyTc0KHL4fGqrUYwANca5BKBKBGRM/widget.js');
-              var t = document.getElementsByTagName('script')[0];
-              t.parentNode.insertBefore(e, t);
-            })();
-          </script>
-          <div class="yotpo yotpo-shoppers-say" data-product-id="{{ product.id }}">&nbsp;</div>
-        </div>
-        <!-- Also By Product Widget Desktop -->
-        {% if section.settings.also_buy_products_id_desktop != blank %}
-          <div class="also-buy-products quick-add-hidden">
-            <div
-              class="also-buy-products-desktop"
-              data-rebuy-id="{{ section.settings.also_buy_products_id_desktop }}"
-            ></div>
-          </div>
-        {% endif %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
