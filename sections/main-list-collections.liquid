@@ -1,11 +1,27 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{%- if section.settings.quick_add == 'standard' -%}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if section.settings.quick_add == 'bulk' -%}
+  <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{{ 'custom-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
 
-<div class="page-width">
-  <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ section.settings.title }}
-  </h1>
-  {%- liquid
+<div class="page-width main-collection-list">
+  {% comment %} {%- liquid
     case section.settings.sort
       when 'products_high', 'products_low'
         assign collections = collections | sort: 'all_products_count'
@@ -17,36 +33,131 @@
       assign collections = collections | reverse
     endif
 
-    assign moduloResult = 28 | modulo: section.settings.columns_desktop
-    assign paginate_by = 30
+    assign moduloResult = 4 | modulo: section.settings.columns_desktop
+    assign paginate_by = 6
     if moduloResult == 0
-      assign paginate_by = 28
+      assign paginate_by = 4
     endif
-  -%}
-  {%- paginate collections by paginate_by -%}
+  -%} {% endcomment %}
+  {%- paginate collections by 24 -%}
     <ul
+      id="collection-list"
       class="collection-list grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
       role="list"
     >
       {%- for collection in collections -%}
-        <li
-          class="collection-list__item grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
-          {% endif %}
-        >
-          {% render 'card-collection',
-            card_collection: collection,
-            media_aspect_ratio: section.settings.image_ratio,
-            columns: 3
-          %}
-        </li>
+        {% if collection.metafields.seo.hidden != 1 %}
+          <li
+            class="collection-list__item grid__item"
+          >
+            <div class="collection-list-main">
+              <div class="collection-title">
+                <h2>{{ collection.title }}</h2>
+                <div class="collection-title-bottom">
+                  {% if collection.description %}
+                    <p>{{ collection.description | strip_html | truncatewords: 50 }}</p>
+                  {% endif %}
+                  <a href="{{ collection.url }}" class="view-link">View All</a>
+                </div>
+              </div>
+              <div class="collection-prodcut-list">
+                {% for product in collection.products limit: 4 %}
+                  <div class="collection-prodcut-card">
+                    {% render 'card-product',
+                      card_product: product,
+                      section_id: section.id,
+                      quick_add: section.settings.quick_add,
+                      show_secondary_image: section.settings.show_secondary_image
+                    %}
+                  </div>
+                {% endfor %}
+              </div>
+              <a href="{{ collection.url }}" class="primary-btn white-btn">View All</a>
+            </div>
+          </li>
+        {% endif %}
       {%- endfor -%}
     </ul>
-    {% render 'pagination', paginate: paginate %}
+    <div id="paginateNext" data-next-url="{{paginate.next.url}}" style="display: none">
+      {{ paginate.next.url }}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      <div id="spining_icons" class="load-more-collection">
+        <a href="javascript:void(0)" id="load-more_btn" class="primary-btn black-btn" style="display: none;">
+          Load More
+        </a>
+      </div>
+    {%- endif -%}
   {%- endpaginate -%}
 </div>
+<script>
+  $(document).ready(function () {
+    var $loadMoreBtn = $("#load-more_btn");
+    var $collectionList = $("#collection-list");
+    var $paginateNext = $("#paginateNext");
+    var loading = false;
+
+    // Show button if next page exists
+    if ($paginateNext.data("next-url")) {
+      $loadMoreBtn.show();
+    }
+
+    function loadMoreCollections() {
+      if (loading) return; // prevent multiple calls
+      var nextUrl = $paginateNext.data("next-url");
+      if (!nextUrl) return;
+
+      loading = true;
+      $("#spining_icons").addClass("loadingMore_button"); // show spinner
+
+      $.ajax({
+        url: nextUrl,
+        type: "GET",
+        success: function (data) {
+          var $html = $(data);
+
+          // Extract new items
+          var $newItems = $html.find("#collection-list .collection-list__item");
+          $collectionList.append($newItems);
+
+          // Update next page url
+          var $newNext = $html.find("#paginateNext");
+          if ($newNext.length && $newNext.data("next-url")) {
+            $paginateNext.data("next-url", $newNext.data("next-url"));
+            loading = false;
+            $("#spining_icons").removeClass("loadingMore_button");
+          } else {
+            $paginateNext.remove();
+            $loadMoreBtn.hide();
+            $("#spining_icons").remove(); // remove spinner if done
+          }
+        },
+        error: function () {
+          loading = false;
+          $("#spining_icons").removeClass("loadingMore_button");
+          $loadMoreBtn.text("Error! Try again");
+        }
+      });
+    }
+
+    // Button click
+    $loadMoreBtn.on("click", function (e) {
+      e.preventDefault();
+      loadMoreCollections();
+    });
+
+    // // Infinite scroll trigger
+    // $(window).on("scroll", function () {
+    //   if (
+    //     $paginateNext.data("next-url") &&
+    //     !loading &&
+    //     $(window).scrollTop() + $(window).height() >= $(document).height() - 1600
+    //   ) {
+    //     loadMoreCollections();
+    //   }
+    // });
+  });
+</script>
 {% schema %}
 {
   "name": "t:sections.main-list-collections.name",
@@ -134,6 +245,28 @@
       ],
       "default": "2",
       "label": "t:sections.main-list-collections.settings.columns_mobile.label"
+    },
+    {
+      "type": "select",
+      "id": "quick_add",
+      "default": "none",
+      "label": "t:sections.main-collection-product-grid.settings.quick_add.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_1"
+        },
+        {
+          "value": "standard",
+          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_secondary_image.label"
     }
   ]
 }
