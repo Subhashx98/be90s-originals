@@ -1,0 +1,74 @@
+{{ 'section-instafeed.css' | asset_url | stylesheet_tag }}
+
+<div class="instagram-feed">
+  <div class="page-width">
+    <div class="instagram-feed-heading">
+      {% if settings.main_heading != blank %}
+        <h2>{{ settings.main_heading }}</h2>
+      {% endif %}
+      <div class="instagram-feed-info">
+        <div class="instagram-feed-profile">
+          {% if settings.logo_image != blank %}
+            <a href="{{ settings.instagram_link }}" target="_blank">
+              <span class="instagram-logo-icon">
+                <img
+                  src="{{ settings.logo_image | image_url }}"
+                  alt="{{ settings.logo_image.alt | default: settings.instagram_user | default: 'BE90s Originals' }}"
+                  width="60"
+                  height="60"
+                  loading="lazy"
+                > </span
+            ></a>
+          {% endif %}
+          <h3>
+            {% if settings.instagram_link != blank or settings.instagram_user != blank %}
+              <a href="{{ settings.instagram_link }}" target="_blank">{{ settings.instagram_user }}</a>
+            {% endif %}
+            {% if settings.followers_text != blank %}
+              <span>{{ settings.followers_text }}</span>
+            {% endif %}
+          </h3>
+        </div>
+        <div class="instagram-feed-btn">
+          {% if settings.instagram_link != blank or settings.button_text != blank %}
+            <a href="{{ settings.instagram_link }}" target="_blank" class="primary-btn black-btn">
+              {{- settings.button_text -}}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="instafeed-block">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Instafeed",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Manage Instagram Feed",
+      "info": "Go to theme setting (Instagram feed section)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instafeed"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,97 @@
+.instagram-feed{
+    padding: 0 0 6.0rem;
+}
+.instagram-feed .instagram-feed-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #FCF2D7;
+    padding: 4.0rem;
+    border-radius: 1.0rem;
+}
+.instagram-feed .instagram-feed-heading h2{
+    font-size: 2.4rem;
+    font-weight: 600;
+    font-family: var(--font-family-figtree);
+}
+.instagram-feed .instagram-feed-info{
+    column-gap: 7.2rem;
+    row-gap: 1.2rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.instagram-feed .instagram-feed-profile{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+.instagram-feed .instagram-feed-info .instagram-feed-profile a{
+    display: flex;
+}
+.instagram-feed .instagram-feed-profile .instagram-logo-icon{
+    width: 6.0rem;
+    height: 6.0rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white-color);
+    padding: 0.2rem;
+}
+.instagram-feed .instagram-logo-icon img{
+    max-width: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.instagram-feed .instagram-feed-profile h3{
+    padding-left: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-figtree);
+}
+.instagram-feed .instagram-feed-profile h3 a{
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 3.2rem;
+    color: var(--primary-color);
+}
+.instagram-feed .instagram-feed-profile h3 a:hover{
+    color: var(--secondary-color)
+}
+.instagram-feed .instagram-feed-profile h3 span{
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: normal;
+    margin-top: 0.8rem;
+    text-transform: capitalize;
+}
+.instagram-feed .instagram-feed-btn{
+    display: flex;
+}
+.instagram-feed .instafeed-block{
+    display: flex;
+    width: 100%;
+    margin-top: 1.0rem;
+}
+/* Responsive */
+@media screen and (max-width: 1200px) {
+     .instagram-feed .instagram-feed-info{ column-gap: 3.2rem;}
+}
+@media screen and (max-width: 991px) {
+    .instagram-feed{padding:  0 0 2.0rem;}
+    .instagram-feed .instagram-feed-heading{ padding: 2rem;}
+    .instagram-feed .instagram-feed-heading h2{ width: 30%;line-height: normal;}
+    .instagram-feed .instagram-feed-info{ column-gap: 2.2rem;}
+    .instagram-feed .instagram-feed-profile .instagram-logo-icon{ width: 5.0rem; height: 5.0rem;}
+    .instagram-feed .instagram-feed-profile h3{padding-left:0.6rem}
+    .instagram-feed .instagram-feed-profile h3 a{font-size: 1.8rem; line-height: 2.8rem; font-weight: 500;}
+    .instagram-feed .instagram-feed-profile h3 span{ margin-top: 0.6rem; font-size: 1.4rem; line-height: 2.2rem;}
+    .instagram-feed .instagram-feed-btn .primary-btn{ padding: 1.4rem 1.5rem;}
+}
+@media screen and (max-width: 767px) {
+    .instagram-feed .instagram-feed-info{ justify-content: center;}
+    .instagram-feed .instagram-feed-heading{ justify-content: center;}
+    .instagram-feed .instagram-feed-heading h2{display: none;}
+}

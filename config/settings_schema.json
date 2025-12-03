@@ -1489,4 +1489,39 @@
       },
     ]
   },
+  {
+    "name": "Instagram Feed",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo"
+      },
+      {
+        "type": "url",
+        "id": "instagram_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "instagram_user",
+        "label": "Instagram User"
+      },
+      {
+        "type": "text",
+        "id": "followers_text",
+        "label": "Followers"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      }
+    ]
+  }
 ]
