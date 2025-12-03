@@ -150,6 +150,50 @@
       "name": "Home Banner",
       "settings": {}
     },
+    "section_new_arrival_XeEqUb": {
+      "type": "section-new-arrival",
+      "blocks": {
+        "collection_block_bfx8t8": {
+          "type": "collection_block",
+          "settings": {
+            "title": "Men's",
+            "collection": "mens",
+            "products_to_show": 8
+          }
+        },
+        "collection_block_gLPeBm": {
+          "type": "collection_block",
+          "settings": {
+            "title": "Women's",
+            "collection": "womens",
+            "products_to_show": 8
+          }
+        },
+        "collection_block_wnNRU9": {
+          "type": "collection_block",
+          "settings": {
+            "title": "Top Wear",
+            "collection": "top-wear",
+            "products_to_show": 8
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_bfx8t8",
+        "collection_block_gLPeBm",
+        "collection_block_wnNRU9"
+      ],
+      "name": "New Arrival",
+      "settings": {
+        "title": "Shop by Category",
+        "show_secondary_image": true,
+        "quick_add": "standard",
+        "cta_text": "Explore All",
+        "cta_url": "shopify://collections",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
     "section_best_seller_LakK7j": {
       "type": "section-best-seller",
       "name": "Best Seller",
@@ -168,6 +212,7 @@
   },
   "order": [
     "section_home_banner_9KDWpD",
+    "section_new_arrival_XeEqUb",
     "section_best_seller_LakK7j"
   ]
 }
