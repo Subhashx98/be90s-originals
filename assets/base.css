@@ -3743,6 +3743,7 @@ button {
 
 .primary-btn:hover {
   background-color: var(--secondary-color);
+  color: var(--white-color);
 }
 
 .border-btn {
