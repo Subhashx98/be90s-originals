@@ -264,12 +264,18 @@
       "settings": {
         "heading": "Watch and Shop"
       }
+    },
+    "section_instafeed_rVx4TJ": {
+      "type": "section-instafeed",
+      "name": "Instafeed",
+      "settings": {}
     }
   },
   "order": [
     "section_home_banner_9KDWpD",
     "section_best_seller_LakK7j",
     "section_new_arrival_XeEqUb",
-    "section_watch_shop_FJpjgL"
+    "section_watch_shop_FJpjgL",
+    "section_instafeed_rVx4TJ"
   ]
 }

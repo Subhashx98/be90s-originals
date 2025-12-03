@@ -128,6 +128,12 @@
     "shipping_message": "You're just [amount] away from free shipping!",
     "cart_drawer_collection": "top-wear",
     "cart_color_scheme": "scheme-1",
+    "main_heading": "Follow Us On Instagram",
+    "logo_image": "shopify://shop_images/be90s-logo.png",
+    "instagram_link": "/",
+    "instagram_user": "be90s.originals",
+    "followers_text": "Be You. Be Original.",
+    "button_text": "Follow @be90s.originals",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
