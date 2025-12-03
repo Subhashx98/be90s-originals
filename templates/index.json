@@ -88,11 +88,11 @@
             "banner_img": "shopify://shop_images/hero-banner-desktop-1.png",
             "mob_banner": "shopify://shop_images/hero-banner-mobile-1.png",
             "sub_heading": "<strong>Premium Hoodies & Unisex Tees.</strong>",
-            "choose_sub_heading_color": "#a5b7c3",
+            "choose_sub_heading_color": "#f3f3f3",
             "heading": "The Winter Drop '25",
-            "choose_heading_color": "#a5b7c3",
+            "choose_heading_color": "#f3f3f3",
             "content": "<p>Cozy fits, fresh colors — designed for the 90s vibe, made for today.</p>",
-            "choose_content_color": "#a5b7c3",
+            "choose_content_color": "#f3f3f3",
             "cta_text": "Explore Collection",
             "choose_button_text_color": "#f3f3f3",
             "choose_button_color": "#4b4949",
@@ -150,6 +150,21 @@
       "name": "Home Banner",
       "settings": {}
     },
+    "section_best_seller_LakK7j": {
+      "type": "section-best-seller",
+      "name": "Best Seller",
+      "settings": {
+        "title": "Women’s Top Wear",
+        "collection": "womens",
+        "products_to_show": 25,
+        "tablet_cards": "2",
+        "mobile_cards": "2",
+        "show_secondary_image": true,
+        "quick_add": "standard",
+        "cta_text": "View All",
+        "cta_url": "shopify://collections/top-wear"
+      }
+    },
     "section_new_arrival_XeEqUb": {
       "type": "section-new-arrival",
       "blocks": {
@@ -193,26 +208,11 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
-    },
-    "section_best_seller_LakK7j": {
-      "type": "section-best-seller",
-      "name": "Best Seller",
-      "settings": {
-        "title": "Women’s Top Wear",
-        "collection": "womens",
-        "products_to_show": 25,
-        "tablet_cards": "2",
-        "mobile_cards": "2",
-        "show_secondary_image": true,
-        "quick_add": "standard",
-        "cta_text": "View All",
-        "cta_url": "shopify://collections/top-wear"
-      }
     }
   },
   "order": [
     "section_home_banner_9KDWpD",
-    "section_new_arrival_XeEqUb",
-    "section_best_seller_LakK7j"
+    "section_best_seller_LakK7j",
+    "section_new_arrival_XeEqUb"
   ]
 }
