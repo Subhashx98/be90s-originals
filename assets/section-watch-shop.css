@@ -1,0 +1,136 @@
+.watch-shop{
+    padding: 0 0 10rem;
+}
+.watch-shop h2{
+    margin-bottom: 6.0rem;
+}
+.watch-shop .watch-shop-content{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+}
+.watch-shop .watch-shop-slider{
+    width: 100%;
+}
+.watch-shop .watch-shop-slider .slick-track{
+    margin: 0;
+    display: flex;
+}
+.watch-shop .watch-shop-slider .slick-slide{
+    padding: 0 1.2rem;
+    height: auto;
+}
+.watch-shop .watch-shop-slider .watch-shop-block{
+    border-radius: var(--border-radius-4);
+    background: var(--light-blue-color);
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+.watch-shop .watch-shop-slider .video-block{
+    width: 100%;
+    display: flex;
+}
+.watch-shop .watch-shop-slider .video-block video{
+    width: 100%;
+    height: 630px;
+    object-fit: cover;
+}
+.watch-shop .watch-shop-slider .video-content{
+    background-color: var(--grey-color);
+    padding: 1.8rem 2.0rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.watch-shop .video-content img{
+    height: 12.0rem;
+    width: 8.0rem;
+    object-fit: cover;
+}
+.watch-shop .video-content .video-product-info{
+    width: calc(100% - 8rem);
+    padding-left: 1.6rem;
+}
+.watch-shop .video-content .video-product-info h6{
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    color: var(--black-color);
+    text-transform: uppercase;
+}
+.watch-shop .video-content .video-product-info p{
+    color: var(--text-secondary-color);
+    text-transform: capitalize;
+    margin-top: 0.8rem;
+    line-height: 2.0rem;
+}
+.watch-shop .video-content .video-product-info .link-text{
+    margin-top: 1.6rem;
+    position: static;
+}
+.watch-shop .video-content .video-product-info .link-text::after{
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+/* Slider Arrow */
+.watch-shop .slider-arrows{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    top: 38%;
+    z-index: 2;
+    left: 0;
+}
+.watch-shop .slider-arrows .page-width{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.watch-shop .slider-arrows .slick-arrow{
+    width: 5.4rem;
+    height: 5.4rem;
+    border: 1px solid var(--border-color);
+    background: var(--white-color);
+    border-radius: 50%;
+    margin: 0;
+    box-shadow: 1px 4px 20px -6px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 1px 4px 20px -6px rgba(0,0,0,0.1);
+    -moz-box-shadow: 1px 4px 20px -6px rgba(0,0,0,0.1);
+}
+.watch-shop .slider-arrows .slick-arrow:hover{
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+.watch-shop .slider-arrows .slick-arrow:hover::before{
+    border-color: var(--white-color);
+}
+.watch-shop .slider-arrows .slick-arrow::before{
+    padding: .4rem;
+}
+/* Responsive */
+@media screen and (max-width: 1200px) {
+    .watch-shop .watch-shop-slider .video-content{padding: 1.4rem 1.0rem;}
+}
+@media screen and (max-width: 991px) {
+    .watch-shop{padding: 2.6rem 0 2.6rem;}
+    .watch-shop h2{margin-bottom: 3.2rem; text-align: center; font-size: 2.4rem;}
+    .watch-shop .watch-shop-slider .slick-slide{padding: 0 0.5rem;}
+    .watch-shop .watch-shop-slider .video-block video{ height: 392px;}
+    .watch-shop .video-content img{height: 7.5rem; width: 5rem;}
+    .watch-shop .video-content .video-product-info{padding-left: 0.8rem; width: calc(100% - 5rem);}
+    .watch-shop .video-content .video-product-info p{ font-size: 1.4rem; line-height: 0.8rem;}
+    .watch-shop .video-content .video-product-info .link-text{margin-top: 0.8rem;}
+    .watch-shop .slider-arrows{ position: static; margin-top: 3.2rem; order: 2; }
+    .watch-shop .slider-arrows .page-width{ justify-content: center; gap: 0 1.2rem; }
+    .watch-shop .slider-arrows .slick-arrow{width: 4.6rem; height: 4.6rem;}
+}
+@media screen and (max-width: 767px) {
+    .watch-shop .video-content .video-product-info h6{ font-size: 1.0rem;}
+}

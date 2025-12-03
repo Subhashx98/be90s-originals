@@ -3609,6 +3609,7 @@ details-disclosure>details {
 /* Common CSS */
 /* Base CSS */
 :root {
+  --black-color: #000000;
   --white-color: #ffffff;
   --primary-color: #242429;
   --secondary-color: #716e41;
@@ -3616,7 +3617,7 @@ details-disclosure>details {
   --light-black-color: 36, 36, 41;
   --light-pink-color: #F5DCD5;
   --light-yellow-color: #FEF9ED;
-  --grey-color: #E6E6E6;
+  --grey-color: #f5f0f4;
   --transition-all: .5s ease-in-out all;
   --moz-transition-all: .5s ease-in-out all;
   --webkit-transition-all: .5s ease-in-out all;
@@ -3715,6 +3716,56 @@ button {
   letter-spacing: 0px;
 }
 
+.link-text {
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    border-bottom: .1rem solid var(--secondary-color);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: .6px;
+}
+.link-text .link-icon-arrow {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.6rem;
+    height: .2rem;
+    background-color: var(--secondary-color);
+    position: relative;
+    margin-left: 1.2rem;
+    transition: var(--webkit-transition-all);
+}
+.link-text .link-icon-arrow:after{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    border: solid var(--secondary-color);
+    border-width: 0 .2rem .2rem 0;
+    display: inline-block;
+    padding: .4rem;
+    transform: translateY(-50%) rotate(-45deg);
+    -webkit-transform: translateY(-50%) rotate(-45deg);
+    content: "";
+    transition: var(--webkit-transition-all);
+}
+.link-text:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.link-text:hover .link-icon-arrow:after{
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+@media screen and (max-width: 991px) {
+  .link-text{
+    margin-top: .8rem;
+    font-size: 1.2rem;
+    line-height: 2.2rem
+  }
+}
 /* Buttons */
 .primary-btn {
   text-transform: capitalize;

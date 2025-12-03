@@ -1,0 +1,123 @@
+{{ 'section-watch-shop.css' | asset_url | stylesheet_tag }}
+
+<div class="watch-shop">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2>{{ section.settings.heading }}</h2>
+    {% endif %}
+  </div>
+  <div class="watch-shop-content">
+    <div class="slider-arrows">
+      <div class="page-width">
+        <button class="video-slick-arrow-prev slick-prev slick-arrow">Prev</button>
+        <button class="video-slick-arrow-next slick-next slick-arrow">Next</button>
+      </div>
+    </div>
+    <div class="watch-shop-slider">
+      {% for block in section.blocks %}
+        {% if block.type == 'watch-sho_block' %}
+          <div class="slick-slide">
+            <div class="watch-shop-block">
+              <div class="video-block">               
+                {{
+                  block.settings.video
+                  | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true
+                }}
+              </div>
+              {% assign products = block.settings.product_id %}
+              {% if products != blank %}
+                <div class="video-content">
+                  <img
+                    src="{{ products.featured_image |  image_url }}"
+                    alt="{{ products.title |  default: 'Soko Glam' }}"
+                    width="80"
+                    height="120"
+                    loading="lazy"
+                  >
+                  <div class="video-product-info">
+                    <h6>{{ products.vendor }}</h6>
+                    <p>{{ products.title }}</p>
+                    <a href="{{ products.url }}" class="link-text small-link-text">
+                      {{- block.settings.cta_text }}
+                      <span class="link-icon-arrow"></span
+                    ></a>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<script>
+  $('.watch-shop-slider').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    infinite: true,
+    speed: 300,
+    centerMode: true,
+    centerPadding: '10%',
+    lazyLoad: 'ondemand',
+    prevArrow: $('.video-slick-arrow-prev'),
+    nextArrow: $('.video-slick-arrow-next'),
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          centerPadding: '10%',
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: '15%',
+        },
+      },
+    ],
+  });
+</script>
+{% schema %}
+{
+  "name": "Video Section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "watch-sho_block",
+      "name": "Video Block",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Recommend Video Dimension: 450 X 630"
+        },
+        {
+          "type": "product",
+          "id": "product_id",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Button Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Section"
+    }
+  ]
+}
+{% endschema %}
