@@ -208,11 +208,68 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
+    },
+    "section_watch_shop_FJpjgL": {
+      "type": "section-watch-shop",
+      "blocks": {
+        "watch_sho_block_tfGaYf": {
+          "type": "watch-sho_block",
+          "settings": {
+            "video": "shopify://files/videos/demo-t-reel.mp4",
+            "product_id": "boat-neck-top-in-black",
+            "cta_text": "Shop Now"
+          }
+        },
+        "watch_sho_block_zryLTY": {
+          "type": "watch-sho_block",
+          "settings": {
+            "video": "shopify://files/videos/demo-t-reel.mp4",
+            "product_id": "boat-neck-top-in-black",
+            "cta_text": "Shop Now"
+          }
+        },
+        "watch_sho_block_D4gyiY": {
+          "type": "watch-sho_block",
+          "settings": {
+            "video": "shopify://files/videos/demo-t-reel.mp4",
+            "product_id": "boat-neck-top-in-black",
+            "cta_text": "Shop Now"
+          }
+        },
+        "watch_sho_block_bQA7LR": {
+          "type": "watch-sho_block",
+          "settings": {
+            "video": "shopify://files/videos/demo-t-reel.mp4",
+            "product_id": "boat-neck-top-in-black",
+            "cta_text": "Shop Now"
+          }
+        },
+        "watch_sho_block_D4WAeC": {
+          "type": "watch-sho_block",
+          "settings": {
+            "video": "shopify://files/videos/demo-t-reel.mp4",
+            "product_id": "boat-neck-top-in-black",
+            "cta_text": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "watch_sho_block_tfGaYf",
+        "watch_sho_block_zryLTY",
+        "watch_sho_block_D4gyiY",
+        "watch_sho_block_bQA7LR",
+        "watch_sho_block_D4WAeC"
+      ],
+      "name": "Watch and Shop",
+      "settings": {
+        "heading": "Watch and Shop"
+      }
     }
   },
   "order": [
     "section_home_banner_9KDWpD",
     "section_best_seller_LakK7j",
-    "section_new_arrival_XeEqUb"
+    "section_new_arrival_XeEqUb",
+    "section_watch_shop_FJpjgL"
   ]
 }
