@@ -1,5 +1,5 @@
 .section-story-sg {
-    padding: 0 0 80px;
+    padding: 50px 0 80px;
 }
 
 .section-story-sg .row {
@@ -278,7 +278,7 @@
 
 @media (max-width: 767px) {
     .section-story-sg {
-        padding: 0 0 50px;
+        padding: 50px 0 50px;
     }
 
     .section-story-sg .sg_story-content h2 {
