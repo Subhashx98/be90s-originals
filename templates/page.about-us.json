@@ -11,13 +11,39 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "main_banner_tY6nVH": {
+      "type": "main-banner",
+      "name": "Main Banner",
+      "settings": {
+        "show_breadcrumbs": true,
+        "banner_image": "shopify://shop_images/blank-colored-t-shirts.jpg",
+        "heading": "{{ page.title }}",
+        "content": ""
+      }
+    },
+    "image_with_content_KJqHri": {
+      "type": "image-with-content",
+      "name": "Image With Content",
+      "settings": {
+        "sg_image": "shopify://shop_images/men-regular-fit-t-shirt-men-oversized-tshirt-men-drop-solder-tshirt-and-men-hoodie-hanging-front-view-photo.png",
+        "media_alignment": true,
+        "text_alignment": true,
+        "heading": "BE90S ORIGINALS’ SIGNATURE T-SHIRT COLLECTION",
+        "description": "<p>Our collection is designed for people who live boldly and dress authentically. <strong>Be90s Originals </strong>offers high-quality unisex T-shirts, crafted from premium fabric with clean cuts and sharp detailing. Each piece blends 90s nostalgia with modern streetwear energy, designed to make you stand out and built to last.</p>",
+        "button_name": "shop now",
+        "button_link": "shopify://collections"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "main_banner_tY6nVH",
+    "image_with_content_KJqHri"
   ]
 }
