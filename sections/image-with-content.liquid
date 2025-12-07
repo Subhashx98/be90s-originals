@@ -1,0 +1,203 @@
+{{ 'image-with-content.css' | asset_url | stylesheet_tag }}
+
+<div class="section-story-sg">
+  <div class="page-width">
+    <div class="row {% if section.settings.media_alignment %}row-reverse{% endif %}">
+      <div class="col-6">
+        <div class="story-sg_block">
+          {% if section.settings.sg_image != blank %}
+            <img
+              src="{{ section.settings.sg_image | image_url }}"
+              width="720"
+              height="580"
+              alt="{{ section.settings.sg_image.alt | default: section.settings.heading | default: 'Be90s Originals' }}"
+              loading="lazy"
+            >
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="sg_story-content {% if section.settings.text_alignment %}text-align{% endif %} ">
+          {% if section.settings.heading != blank %}
+            <h2>{{ section.settings.heading }}</h2>
+          {% endif %}
+
+          {% if section.settings.description != blank %}
+            {{ section.settings.description }}
+          {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="accordion-main">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'accordion_block' %}
+                  {% if block.settings.title != blank or block.settings.description != blank %}
+                    <div class="accordion-item">
+                      <div class="accordion-heading">
+                        <h3>{{ block.settings.title }}</h3>
+                        {{ 'arrow-icon.svg' | inline_asset_content }}
+                      </div>
+                      <div class="accordion-content">
+                        {{ block.settings.description }}
+                      </div>
+                    </div>
+                  {% endif %}
+              {% endcase %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="benifits_content-list">
+            {% for Cards in section.blocks %}
+              {% if Cards.type == 'benifits_cards' %}
+                <div class="benifits-list">
+                  <div class="benifits-block">
+                    {% if Cards.settings.benifits_block != blank %}
+                      <img
+                        src="{{ Cards.settings.benifits_block | image_url }}"
+                        width="30"
+                        height="30"
+                        alt="{{ Cards.settings.benifits_block.alt | default: Cards.settings.heading  | default: 'Be90s Originals' }}"
+                        loading="lazy"
+                      >
+                    {% endif %}
+                  </div>
+                  <div class="benifits_content">
+                    {% if Cards.settings.heading != blank %}
+                      <h3>{{ Cards.settings.heading }}</h3>
+                    {% endif %}
+                    {% if Cards.settings.description != blank %}
+                      {{ Cards.settings.description }}
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+          {% if section.settings.button_link != blank and section.settings.button_name != blank %}
+            <a href="{{ section.settings.button_link }}" class="button_sg">
+              {{- section.settings.button_name -}}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    // Initially open the first accordion item
+    $('.accordion-item').first().find('.accordion-content').slideDown();
+    $('.accordion-item').first().find('.accordion-heading').addClass('active');
+
+    // Accordion toggle logic
+    $('.accordion-heading').on('click', function () {
+      var $this = $(this);
+      var $content = $this.next('.accordion-content');
+
+      // Close all other contents and remove active class
+      $('.accordion-content').not($content).slideUp();
+      $('.accordion-heading').not($this).removeClass('active');
+
+      // Toggle the clicked content
+      $content.stop(true, true).slideToggle();
+      $this.toggleClass('active');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Image With Content",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "sg_image",
+      "label": "Image",
+      "info": "Recommend Image Size: 720 X 600"
+    },
+    {
+      "type": "checkbox",
+      "id": "media_alignment",
+      "label": "Image Position Right",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "text_alignment",
+      "label": "Text Align Center",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_name",
+      "label": "Button Name"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion_block",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title"
+        },
+        {
+          "type": "richtext",
+          "label": "Description",
+          "id": "description"
+        }
+      ]
+    },
+    {
+      "type": "benifits_cards",
+      "name": "List Cards",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "benifits_block",
+          "label": "Image",
+          "info": "Recommend Image Size: 30 X 30"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image With Content",
+      "category": "Custom About"
+    }
+  ]
+}
+{% endschema %}

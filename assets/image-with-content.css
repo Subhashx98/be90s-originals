@@ -1,0 +1,381 @@
+.section-story-sg {
+    padding: 0 0 80px;
+}
+
+.section-story-sg .row {
+    display: flex;
+    align-items: center;
+}
+
+.section-story-sg .row .col-6 {
+    width: 100%;
+    max-width: 50%;
+}
+
+.section-story-sg .story-sg_block img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 580px;
+    min-height: 580px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
+}
+
+.section-story-sg .sg_story-content {
+    padding: 0 0 0 4.0rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.0rem;
+}
+
+.section-story-sg .sg_story-content.text-align {
+    text-align: center;
+}
+
+.section-story-sg .sg_story-content h2 {
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 3.8rem;
+    text-transform: uppercase;
+    color: var(--blue-color-primary);
+}
+
+.section-story-sg .sg_story-content p {
+    font-family: var(--font-family-figtree);
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    color: var(--text-secondary-color);
+}
+
+
+.section-story-sg .sg_story-content ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1.6rem;
+    column-gap: 3.8rem;
+    row-gap: 1.4rem;
+    padding: 0 0 0 1.0rem;
+}
+
+.section-story-sg .sg_story-content h3,
+.section-story-sg .sg_story-content h4,
+.section-story-sg .sg_story-content h5 {
+    font-size: 20px;
+    line-height: normal;
+    margin: 2.2rem 0 0.4rem;
+}
+
+.section-story-sg .sg_story-content ul li {
+    font-family: var(--font-family-figtree);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    color: #1B1F23;
+    letter-spacing: 0;
+}
+
+.section-story-sg .sg_story-content ul li strong{
+    font-family: var(--font-family-runddisplay-bold);
+}
+
+.section-story-sg .row.row-reverse {
+    flex-direction: row-reverse;
+}
+
+.section-story-sg .row.row-reverse .sg_story-content {
+    padding: 0 80px 0 60px;
+}
+
+.section-story-sg .button_sg {
+    display: inline-flex;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    padding: 20px 50px;
+    font-family: var(--font-family-runddisplay-bold);
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: .96px;
+    text-transform: uppercase;
+    color: var(--white-color);
+    border-radius: 4px;
+    margin-top: 40px;
+}
+
+.section-story-sg .button_sg:hover {
+    background-color: var(--primary-color);
+}
+
+/* accordion Style */
+.section-story-sg .sg_story-content .accordion-main {
+    padding-top: 16px;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-box {
+    padding: 0 4px;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-item {
+    padding: 28px 0;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-item:first-child {
+    padding: 0 0 28px;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-item:last-child {
+    padding: 28px 0 0;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-item+.accordion-item {
+    border-top: 1px solid #DDDDDD;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-heading h3 {
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 100%;
+    margin-bottom: 0;
+
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-heading svg {
+    width: 24px;
+    height: 24px;
+    rotate: 180deg;
+    transition: all .4s;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-heading svg path {
+    stroke: #0C181C;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-content {
+    padding: 14px 0 0;
+    display: none;
+}
+
+
+
+.section-story-sg .sg_story-content .accordion-main .accordion-content p {
+    font-family: var(--font-family-figtree);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--text-secondary-color);
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-content p+p {
+    margin-top: 10px;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-heading.active svg {
+    rotate: 0deg;
+}
+
+.section-story-sg .sg_story-content .accordion-main .accordion-content ul{
+    flex-direction: column;
+}
+
+/* Our Benifits Style */
+
+.section-story-sg .sg_story-content .benifits_content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding-top: 16px;
+}
+
+.section-story-sg .sg_story-content .benifits_content-list .benifits-list {
+    display: flex;
+    gap: 22px;
+}
+
+.section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits-block {
+    width: 68px;
+    height: 68px;
+    min-width: 68px;
+    min-height: 68px;
+    background-color: var(--pink-secondary-color);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits-block img {
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+.section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits_content {
+    padding: 4px 0;
+}
+
+.section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits_content h3 {
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 100%;
+    margin-bottom: 12px;
+    color: #0C181C;
+}
+
+.section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits_content p {
+    font-family: var(--font-family-figtree);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--text-secondary-color);
+}
+
+@media (min-width: 1300px) {
+    .section-story-sg .sg_story-content {padding: 0 6.0rem 0 8.0rem;}
+}
+
+@media (max-width: 1168px) {
+
+    .section-story-sg .sg_story-content,
+    .section-story-sg .row.row-reverse .sg_story-content {
+        padding: 0px 30px;
+    }
+}
+
+
+@media (max-width: 991px) {
+    .section-story-sg .row {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .section-story-sg .row.row-reverse {
+        flex-direction: column;
+    }
+
+    .section-story-sg .row.row-reverse .sg_story-content {
+        padding: 0;
+    }
+
+    .section-story-sg .row .col-6 {
+        max-width: 100%;
+    }
+
+    .section-story-sg .sg_story-content {
+        padding: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .section-story-sg {
+        padding: 0 0 50px;
+    }
+
+    .section-story-sg .sg_story-content h2 {
+        font-size: 32px;
+        line-height: 100%;
+        margin-bottom: 5px;
+    }
+
+    .section-story-sg .sg_story-content p {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .section-story-sg .story-sg_block img {
+        min-height: auto;
+    }
+    .section-story-sg .sg_story-content ul{
+        column-gap: 2.4rem;
+    }
+    .section-story-sg .sg_story-content ul li {
+        font-size: 12px;
+        line-height: 100%;
+    }
+
+    .section-story-sg .sg_story-content .accordion-main {
+        padding-top: 15px;
+    }
+
+    .section-story-sg .sg_story-content .accordion-main .accordion-heading h3 {
+        font-size: 18px;
+        line-height: 100%;
+    }
+
+    .section-story-sg .sg_story-content .accordion-main .accordion-heading svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .section-story-sg .sg_story-content .accordion-main .accordion-content {
+        padding: 10px 0 0;
+        display: none;
+    }
+
+    .section-story-sg .sg_story-content .accordion-main .accordion-item {
+        padding: 20px 0;
+    }
+
+    .section-story-sg .sg_story-content .accordion-main .accordion-item:first-child {
+        padding: 0 0 20px;
+    }
+
+    .section-story-sg .sg_story-content .accordion-main .accordion-item:last-child {
+        padding: 20px 0 0;
+    }
+
+    /*  */
+
+    .section-story-sg .sg_story-content .benifits_content-list {
+        padding-top: 21px;
+        gap: 20px;
+    }
+
+    .section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits-block {
+        width: 50px;
+        height: 50px;
+        min-height: 50px;
+        min-width: 50px;
+    }
+
+    .section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits-block {
+        width: 24px;
+        height: 24px;
+    }
+
+    .section-story-sg .sg_story-content .benifits_content-list .benifits-list {
+        gap: 14px;
+    }
+
+    .section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits_content {
+        padding: 0;
+    }
+
+    .section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits_content h3 {
+        font-size: 16px;
+        line-height: 100%;
+        margin-bottom: 7px;
+    }
+
+    .section-story-sg .sg_story-content .benifits_content-list .benifits-list .benifits_content p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+@media (max-width: 580px) {
+    .section-story-sg .story-sg_block img {
+        max-height: 306px;
+    }
+}
